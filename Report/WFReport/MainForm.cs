@@ -23,5 +23,21 @@ namespace WFReport
             pnlLeft.Height = this.Height;
             this.Text = this.Width.ToString() + "x" + this.Height.ToString();
         }
+
+        private void splitter1_Move(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void splitter1_SplitterMoving(object sender, SplitterEventArgs e)
+        {
+            MessageBox.Show("!");
+        }
+
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
