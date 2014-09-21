@@ -1,0 +1,21 @@
+SELECT
+    <rows>,
+    <columns>, -- dates must be groupped
+    sum(amount)/sum(price)
+    
+FROM 
+    
+    <operation_journal>
+    <foreach in dicts>
+        INNER JOIN <dict_name> ON <operation_journal>.<dict_name>Id = <dict_name>.Id
+    <endfor>
+
+WHERE
+    
+    <foreach in fixed>
+        <operation_journal>.<neededId> in 
+            (SELECT Id FROM <neededTable> WHERE <list>) --not clear
+    <endfor>
+GROUP BY
+    <rows>,
+    <columns>

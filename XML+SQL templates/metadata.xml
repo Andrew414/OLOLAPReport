@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <dbName>AppleShop</dbName>
+    <datatables>
+        <table>
+            <name>Buyer</name>
+            <column type="string">Gender</column>
+        </table>
+        <table>
+            <name>Item</name>
+            <column type="string">Model</column>
+            <column type="string">Storage</column>
+            <column type="string">Color</column>
+        </table>
+        <table>
+            <name>Store</name>
+            <column type="string">Country</column>
+            <column type="string">City</column>
+            <column type="string">Address</column>
+        </table>
+    </datatables>
+    <operationtable>
+        <name>Operation</name>
+        <aggregate>
+            <column type="int">Amount</column>
+        </aggregate>
+        <aggregate>
+            <column type="int">Price</column>
+        </aggregate>
+        <information>
+            <column type="date">Date</date>
+        </information>
+    </operationtable>
+</metadata>

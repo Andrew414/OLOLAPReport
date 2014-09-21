@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report>
+    <dbName metadata="metadata.xml">AppleShop</dbName>
+    <visible>
+        <rows>
+            <table>Store</table>
+            <column>Address</column>
+        </rows>
+        <columns>
+            <table>Operation</table>
+            <column>Date</column>
+            <group>Week</group>
+        </columns>
+        <aggregate>
+            <name>Amount</name>
+        </aggregate>
+    </visible>
+    <fixeddata>
+        <options>
+            <table>Item</table>
+            <column>Name</column>
+            <options>
+                <option>iPhone</option>
+                <option>iPad</option>
+            <options>
+        </options>
+        <options>
+            <table>Buyer</table>
+            <column>Gender</column>
+            <options>
+                <option>Female</option>
+            <options>
+        </options>
+        <fromto>
+            <table>Item</table>
+            <column>Date</column>
+            <from>2014-01-01</from>
+            <to>2014-12-31</to>
+        </fromto>
+    </fixeddata>
+</report>
