@@ -43,7 +43,7 @@
             this.btnFiltersRows = new System.Windows.Forms.Button();
             this.btnFiltersColumn = new System.Windows.Forms.Button();
             this.cboAggregate = new System.Windows.Forms.ComboBox();
-            this.cboComboRows = new System.Windows.Forms.ComboBox();
+            this.cboRows = new System.Windows.Forms.ComboBox();
             this.lblAggregate = new System.Windows.Forms.Label();
             this.cboColumns = new System.Windows.Forms.ComboBox();
             this.lblRows = new System.Windows.Forms.Label();
@@ -180,7 +180,7 @@
             this.gbxColRowAgg.Controls.Add(this.btnFiltersRows);
             this.gbxColRowAgg.Controls.Add(this.btnFiltersColumn);
             this.gbxColRowAgg.Controls.Add(this.cboAggregate);
-            this.gbxColRowAgg.Controls.Add(this.cboComboRows);
+            this.gbxColRowAgg.Controls.Add(this.cboRows);
             this.gbxColRowAgg.Controls.Add(this.lblAggregate);
             this.gbxColRowAgg.Controls.Add(this.cboColumns);
             this.gbxColRowAgg.Controls.Add(this.lblRows);
@@ -221,19 +221,21 @@
             // 
             // cboAggregate
             // 
+            this.cboAggregate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboAggregate.FormattingEnabled = true;
             this.cboAggregate.Location = new System.Drawing.Point(10, 119);
             this.cboAggregate.Name = "cboAggregate";
             this.cboAggregate.Size = new System.Drawing.Size(169, 21);
             this.cboAggregate.TabIndex = 1;
             // 
-            // cboComboRows
+            // cboRows
             // 
-            this.cboComboRows.FormattingEnabled = true;
-            this.cboComboRows.Location = new System.Drawing.Point(10, 78);
-            this.cboComboRows.Name = "cboComboRows";
-            this.cboComboRows.Size = new System.Drawing.Size(169, 21);
-            this.cboComboRows.TabIndex = 1;
+            this.cboRows.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboRows.FormattingEnabled = true;
+            this.cboRows.Location = new System.Drawing.Point(10, 78);
+            this.cboRows.Name = "cboRows";
+            this.cboRows.Size = new System.Drawing.Size(169, 21);
+            this.cboRows.TabIndex = 1;
             // 
             // lblAggregate
             // 
@@ -246,6 +248,7 @@
             // 
             // cboColumns
             // 
+            this.cboColumns.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboColumns.FormattingEnabled = true;
             this.cboColumns.Location = new System.Drawing.Point(10, 37);
             this.cboColumns.Name = "cboColumns";
@@ -549,7 +552,7 @@
         private System.Windows.Forms.Button btnFiltersAggregate;
         private System.Windows.Forms.Button btnFiltersRows;
         private System.Windows.Forms.ComboBox cboAggregate;
-        private System.Windows.Forms.ComboBox cboComboRows;
+        private System.Windows.Forms.ComboBox cboRows;
         private System.Windows.Forms.Label lblAggregate;
         private System.Windows.Forms.Label lblRows;
         private System.Windows.Forms.GroupBox gbxAdditional;

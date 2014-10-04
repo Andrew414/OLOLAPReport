@@ -43,7 +43,7 @@ namespace WFReport
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            MessageBox.Show("OLOLO");
         }
 
         private void helpToolStripButton_Click(object sender, EventArgs e)
@@ -59,6 +59,7 @@ namespace WFReport
                 {
                     LoadMetadataFromFile(ofdMetadata.FileName);
 
+                    UpdateUIwithMetadata();
                     MessageBox.Show("The description of the database \"" + currentDB.Name + "\"" + " was loaded successfully!",
                     "Database metadata loaded", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -240,6 +241,7 @@ namespace WFReport
                         }
 
                         currentPathReport = ofdReport.FileName;
+                        UpdateUIwithReportData();
                     }
                 }
                 catch (Exception ex)
@@ -253,9 +255,44 @@ namespace WFReport
             }
         }
 
+        
+
         private void UpdateUIwithMetadata()
         {
+            lbxImportantFields.Items.Clear();
+            cboAggregate.Items.Clear();
+            cboColumns.Items.Clear();
+            cboRows.Items.Clear();
+
+            cboAggregate.Items.Add(" ");
+            cboColumns.Items.Add(" ");
+            cboRows.Items.Add(" ");
+
+            foreach (var i in currentDB.Tables.Values)
+            {
+                foreach (var j in i.Columns.Values)
+                {
+                    if (!j.Aggregate)
+                    {
+                        lbxImportantFields.Items.Add(i.Name + ": " + j.Name, true);
+                        cboColumns.Items.Add(i.Name + ": " + j.Name);
+                        cboRows.Items.Add(i.Name + ": " + j.Name);
+                        
+                    } else
+                    {
+                        cboAggregate.Items.Add(i.Name + ": " + j.Name);
+                    }
+                }
+            }
+
             
+
+            
+        }
+
+        private void UpdateUIwithReportData()
+        {
+            UpdateUIwithMetadata();
         }
 
         private void openToolStripButton_Click(object sender, EventArgs e)
