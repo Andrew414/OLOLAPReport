@@ -16,23 +16,23 @@
         </aggregate>
     </visible>
     <fixeddata>
-        <options>
+        <restriction>
             <table>Item</table>
-            <column>Name</column>
+            <column>Model</column>
             <options>
                 <option>iPhone</option>
                 <option>iPad</option>
             <options>
-        </options>
-        <options>
+        </restriction>
+        <restriction>
             <table>Buyer</table>
             <column>Gender</column>
             <options>
                 <option>Female</option>
             <options>
-        </options>
+        </restriction>
         <fromto>
-            <table>Item</table>
+            <table>Operation</table>
             <column>Date</column>
             <from>2014-01-01</from>
             <to>2014-12-31</to>

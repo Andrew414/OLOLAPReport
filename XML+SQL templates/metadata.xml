@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-    <dbName>AppleShop</dbName>
+    <dbname>AppleShop</dbname>
+    <dbpath>shop.dat</dbpath>
     <datatables>
         <table>
             <name>Buyer</name>
@@ -23,12 +24,10 @@
         <name>Operation</name>
         <aggregate>
             <column type="int">Amount</column>
-        </aggregate>
-        <aggregate>
             <column type="int">Price</column>
         </aggregate>
         <information>
-            <column type="date">Date</date>
+            <column type="date">Date</column>
         </information>
     </operationtable>
 </metadata>

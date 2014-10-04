@@ -17,7 +17,7 @@
     <fixeddata>
         <restriction>
             <table>Item</table>
-            <column>Name</column>
+            <column>Model</column>
             <options>
                 <option>iPhone</option>
             <options>

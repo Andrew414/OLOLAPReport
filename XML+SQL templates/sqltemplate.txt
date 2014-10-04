@@ -14,8 +14,9 @@ WHERE
     
     <foreach in fixed>
         <operation_journal>.<neededId> in 
-            (SELECT Id FROM <neededTable> WHERE <list>) --not clear
+            (SELECT Id FROM <neededTable> WHERE <list>)
     <endfor>
+    
 GROUP BY
     <rows>,
     <columns>
