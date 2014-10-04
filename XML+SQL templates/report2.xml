@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report>
-    <dbName metadata="metadata.xml">AppleShop</dbName>
+    <dbname metadata="metadata.xml">AppleShop</dbname>
     <visible>
         <rows>
             <table>Store</table>
@@ -16,21 +16,19 @@
         </aggregate>
     </visible>
     <fixeddata>
-        <restriction>
+        <options>
             <table>Item</table>
             <column>Model</column>
-            <options>
-                <option>iPhone</option>
-                <option>iPad</option>
-            <options>
-        </restriction>
-        <restriction>
+            
+            <option>iPhone 5s</option>
+            <option>iPad mini</option>
+        </options>
+        <options>
             <table>Buyer</table>
             <column>Gender</column>
-            <options>
-                <option>Female</option>
-            <options>
-        </restriction>
+            
+            <option>Female</option>
+        </options>
         <fromto>
             <table>Operation</table>
             <column>Date</column>

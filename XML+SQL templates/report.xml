@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report>
-    <dbName metadata="metadata.xml">AppleShop</dbName>
+    <dbname metadata="metadata.xml">AppleShop</dbname>
     <visible>
         <rows>
             <table>Buyer</table>
@@ -20,7 +20,7 @@
             <column>Model</column>
             <options>
                 <option>iPhone</option>
-            <options>
+            </options>
         </restriction>
     </fixeddata>
 </report>

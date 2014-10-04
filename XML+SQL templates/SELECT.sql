@@ -1,32 +1,30 @@
 SELECT 
-	Buyer.Sex,
-	Shop.Number,
-	count(*)
+	Buyer.Gender,
+	Store.Address,
+	sum(Operation.Price)
 FROM
-	Journal_Sales
-	INNER JOIN Buyer ON Buyer.Id = Journal_Sales.BuyerId
-	INNER JOIN Shop  ON Shop.Id  = Journal_Sales.ShopId
-	INNER JOIN Item  ON Item.Id  = Journal_Sales.ItemId
+	Operation
+	INNER JOIN Buyer ON Buyer.Id = Operation.BuyerId
+	INNER JOIN Store ON Store.Id = Operation.StoreId
+	INNER JOIN Item  ON Item.Id  = Operation.ItemId
 WHERE
-	Journal_Sales.ItemId in
-		(SELECT Id FROM Item WHERE Item.Model like 'ipad')
+	Operation.ItemId in
+		(SELECT Id FROM Item WHERE Item.Model like 'iPhone 5s')
 GROUP BY
-	Buyer.Sex,
-	Shop.Number
+	Buyer.Gender,
+	Store.Address;
 
-SELECT * FROM Journal_Sales
-SELECT * FROM Item
 
 SELECT 
-	MONTH(Journal_Sales.Date),
-	Shop.Number,
-	count(*)
+	strftime("%m-%Y", Operation.Date) as "month",
+	Store.Address,
+	count(Operation.Amount)
 FROM
-	Journal_Sales
-	INNER JOIN Buyer ON Buyer.Id = Journal_Sales.BuyerId
-	INNER JOIN Shop  ON Shop.Id  = Journal_Sales.ShopId
-	INNER JOIN Item  ON Item.Id  = Journal_Sales.ItemId
+	Operation
+	INNER JOIN Buyer ON Buyer.Id = Operation.BuyerId
+	INNER JOIN Store ON Store.Id = Operation.StoreId
+	INNER JOIN Item  ON Item.Id  = Operation.ItemId
 
 GROUP BY
-	MONTH(Journal_Sales.Date),
-	Shop.Number
+	strftime("%m-%Y", Operation.Date),
+	Store.Address;

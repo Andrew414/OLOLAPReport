@@ -30,58 +30,54 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.pnlLeft = new System.Windows.Forms.Panel();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.splitter1 = new System.Windows.Forms.Splitter();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.btnReload = new System.Windows.Forms.Button();
+            this.btnGenerate = new System.Windows.Forms.Button();
+            this.splLeftPanel = new System.Windows.Forms.Splitter();
+            this.gbxAdditional = new System.Windows.Forms.GroupBox();
+            this.btnMainFiltersDelete = new System.Windows.Forms.Button();
+            this.btnMainFiltersEdit = new System.Windows.Forms.Button();
+            this.btnMainFiltersAdd = new System.Windows.Forms.Button();
+            this.lbxAdditionalFilters = new System.Windows.Forms.ListBox();
+            this.gbxColRowAgg = new System.Windows.Forms.GroupBox();
+            this.btnFiltersAggregate = new System.Windows.Forms.Button();
+            this.btnFiltersRows = new System.Windows.Forms.Button();
+            this.btnFiltersColumn = new System.Windows.Forms.Button();
+            this.cboAggregate = new System.Windows.Forms.ComboBox();
+            this.cboComboRows = new System.Windows.Forms.ComboBox();
+            this.lblAggregate = new System.Windows.Forms.Label();
+            this.cboColumns = new System.Windows.Forms.ComboBox();
+            this.lblRows = new System.Windows.Forms.Label();
+            this.lblColumns = new System.Windows.Forms.Label();
             this.gbxAllFields = new System.Windows.Forms.GroupBox();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.lbxImportantFields = new System.Windows.Forms.CheckedListBox();
             this.menuMain = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openMetadataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mimFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.mimFileNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.mimFileOpenReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.mimFileOpenMetadata = new System.Windows.Forms.ToolStripMenuItem();
+            this.mspOpenSave = new System.Windows.Forms.ToolStripSeparator();
+            this.mimFileSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.mimFileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.mspSavePrint = new System.Windows.Forms.ToolStripSeparator();
+            this.mimFilePrint = new System.Windows.Forms.ToolStripMenuItem();
+            this.mspPrintExit = new System.Windows.Forms.ToolStripSeparator();
+            this.mimFileExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.mimOptions = new System.Windows.Forms.ToolStripMenuItem();
+            this.mimOptionsOptions = new System.Windows.Forms.ToolStripMenuItem();
+            this.mimOptionsAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.tbrMain = new System.Windows.Forms.ToolStrip();
-            this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.cutToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.tbxNew = new System.Windows.Forms.ToolStripButton();
+            this.tbxOpenReport = new System.Windows.Forms.ToolStripButton();
+            this.tbxSave = new System.Windows.Forms.ToolStripButton();
+            this.tbxPrint = new System.Windows.Forms.ToolStripButton();
+            this.mspToolbar = new System.Windows.Forms.ToolStripSeparator();
+            this.tbxHelp = new System.Windows.Forms.ToolStripButton();
             this.ofdReport = new System.Windows.Forms.OpenFileDialog();
             this.sfdReport = new System.Windows.Forms.SaveFileDialog();
             this.ofdMetadata = new System.Windows.Forms.OpenFileDialog();
             this.pnlLeft.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.gbxAdditional.SuspendLayout();
+            this.gbxColRowAgg.SuspendLayout();
             this.gbxAllFields.SuspendLayout();
             this.menuMain.SuspendLayout();
             this.tbrMain.SuspendLayout();
@@ -90,193 +86,193 @@
             // pnlLeft
             // 
             this.pnlLeft.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.pnlLeft.Controls.Add(this.button8);
-            this.pnlLeft.Controls.Add(this.button7);
-            this.pnlLeft.Controls.Add(this.splitter1);
-            this.pnlLeft.Controls.Add(this.groupBox2);
-            this.pnlLeft.Controls.Add(this.groupBox1);
+            this.pnlLeft.Controls.Add(this.btnReload);
+            this.pnlLeft.Controls.Add(this.btnGenerate);
+            this.pnlLeft.Controls.Add(this.splLeftPanel);
+            this.pnlLeft.Controls.Add(this.gbxAdditional);
+            this.pnlLeft.Controls.Add(this.gbxColRowAgg);
             this.pnlLeft.Controls.Add(this.gbxAllFields);
             this.pnlLeft.Location = new System.Drawing.Point(0, 52);
             this.pnlLeft.Name = "pnlLeft";
             this.pnlLeft.Size = new System.Drawing.Size(271, 509);
             this.pnlLeft.TabIndex = 0;
             // 
-            // button8
+            // btnReload
             // 
-            this.button8.Location = new System.Drawing.Point(11, 478);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(115, 23);
-            this.button8.TabIndex = 2;
-            this.button8.Text = "Reload data";
-            this.button8.UseVisualStyleBackColor = true;
+            this.btnReload.Location = new System.Drawing.Point(11, 478);
+            this.btnReload.Name = "btnReload";
+            this.btnReload.Size = new System.Drawing.Size(115, 23);
+            this.btnReload.TabIndex = 2;
+            this.btnReload.Text = "Reload data";
+            this.btnReload.UseVisualStyleBackColor = true;
             // 
-            // button7
+            // btnGenerate
             // 
-            this.button7.Location = new System.Drawing.Point(141, 478);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(115, 23);
-            this.button7.TabIndex = 2;
-            this.button7.Text = "Generate graph";
-            this.button7.UseVisualStyleBackColor = true;
+            this.btnGenerate.Location = new System.Drawing.Point(141, 478);
+            this.btnGenerate.Name = "btnGenerate";
+            this.btnGenerate.Size = new System.Drawing.Size(115, 23);
+            this.btnGenerate.TabIndex = 2;
+            this.btnGenerate.Text = "Generate graph";
+            this.btnGenerate.UseVisualStyleBackColor = true;
             // 
-            // splitter1
+            // splLeftPanel
             // 
-            this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter1.Location = new System.Drawing.Point(268, 0);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 509);
-            this.splitter1.TabIndex = 1;
-            this.splitter1.TabStop = false;
-            this.splitter1.SplitterMoving += new System.Windows.Forms.SplitterEventHandler(this.splitter1_SplitterMoving);
-            this.splitter1.Move += new System.EventHandler(this.splitter1_Move);
+            this.splLeftPanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.splLeftPanel.Location = new System.Drawing.Point(268, 0);
+            this.splLeftPanel.Name = "splLeftPanel";
+            this.splLeftPanel.Size = new System.Drawing.Size(3, 509);
+            this.splLeftPanel.TabIndex = 1;
+            this.splLeftPanel.TabStop = false;
+            this.splLeftPanel.SplitterMoving += new System.Windows.Forms.SplitterEventHandler(this.splitter1_SplitterMoving);
+            this.splLeftPanel.Move += new System.EventHandler(this.splitter1_Move);
             // 
-            // groupBox2
+            // gbxAdditional
             // 
-            this.groupBox2.Controls.Add(this.button6);
-            this.groupBox2.Controls.Add(this.button5);
-            this.groupBox2.Controls.Add(this.button4);
-            this.groupBox2.Controls.Add(this.listBox1);
-            this.groupBox2.Location = new System.Drawing.Point(11, 356);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(251, 116);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Additional filters";
+            this.gbxAdditional.Controls.Add(this.btnMainFiltersDelete);
+            this.gbxAdditional.Controls.Add(this.btnMainFiltersEdit);
+            this.gbxAdditional.Controls.Add(this.btnMainFiltersAdd);
+            this.gbxAdditional.Controls.Add(this.lbxAdditionalFilters);
+            this.gbxAdditional.Location = new System.Drawing.Point(11, 356);
+            this.gbxAdditional.Name = "gbxAdditional";
+            this.gbxAdditional.Size = new System.Drawing.Size(251, 116);
+            this.gbxAdditional.TabIndex = 0;
+            this.gbxAdditional.TabStop = false;
+            this.gbxAdditional.Text = "Additional filters";
             // 
-            // button6
+            // btnMainFiltersDelete
             // 
-            this.button6.Location = new System.Drawing.Point(186, 90);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(59, 23);
-            this.button6.TabIndex = 2;
-            this.button6.Text = "Delete";
-            this.button6.UseVisualStyleBackColor = true;
+            this.btnMainFiltersDelete.Location = new System.Drawing.Point(186, 90);
+            this.btnMainFiltersDelete.Name = "btnMainFiltersDelete";
+            this.btnMainFiltersDelete.Size = new System.Drawing.Size(59, 23);
+            this.btnMainFiltersDelete.TabIndex = 2;
+            this.btnMainFiltersDelete.Text = "Delete";
+            this.btnMainFiltersDelete.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // btnMainFiltersEdit
             // 
-            this.button5.Location = new System.Drawing.Point(121, 90);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(59, 23);
-            this.button5.TabIndex = 2;
-            this.button5.Text = "Edit...";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnMainFiltersEdit.Location = new System.Drawing.Point(121, 90);
+            this.btnMainFiltersEdit.Name = "btnMainFiltersEdit";
+            this.btnMainFiltersEdit.Size = new System.Drawing.Size(59, 23);
+            this.btnMainFiltersEdit.TabIndex = 2;
+            this.btnMainFiltersEdit.Text = "Edit...";
+            this.btnMainFiltersEdit.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btnMainFiltersAdd
             // 
-            this.button4.Location = new System.Drawing.Point(7, 90);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(59, 23);
-            this.button4.TabIndex = 2;
-            this.button4.Text = "Add...";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnMainFiltersAdd.Location = new System.Drawing.Point(7, 90);
+            this.btnMainFiltersAdd.Name = "btnMainFiltersAdd";
+            this.btnMainFiltersAdd.Size = new System.Drawing.Size(59, 23);
+            this.btnMainFiltersAdd.TabIndex = 2;
+            this.btnMainFiltersAdd.Text = "Add...";
+            this.btnMainFiltersAdd.UseVisualStyleBackColor = true;
             // 
-            // listBox1
+            // lbxAdditionalFilters
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(7, 20);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(238, 69);
-            this.listBox1.TabIndex = 0;
+            this.lbxAdditionalFilters.FormattingEnabled = true;
+            this.lbxAdditionalFilters.Location = new System.Drawing.Point(7, 20);
+            this.lbxAdditionalFilters.Name = "lbxAdditionalFilters";
+            this.lbxAdditionalFilters.Size = new System.Drawing.Size(238, 69);
+            this.lbxAdditionalFilters.TabIndex = 0;
             // 
-            // groupBox1
+            // gbxColRowAgg
             // 
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.comboBox3);
-            this.groupBox1.Controls.Add(this.comboBox2);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 202);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(251, 148);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Columns, rows, aggregate";
+            this.gbxColRowAgg.Controls.Add(this.btnFiltersAggregate);
+            this.gbxColRowAgg.Controls.Add(this.btnFiltersRows);
+            this.gbxColRowAgg.Controls.Add(this.btnFiltersColumn);
+            this.gbxColRowAgg.Controls.Add(this.cboAggregate);
+            this.gbxColRowAgg.Controls.Add(this.cboComboRows);
+            this.gbxColRowAgg.Controls.Add(this.lblAggregate);
+            this.gbxColRowAgg.Controls.Add(this.cboColumns);
+            this.gbxColRowAgg.Controls.Add(this.lblRows);
+            this.gbxColRowAgg.Controls.Add(this.lblColumns);
+            this.gbxColRowAgg.Location = new System.Drawing.Point(12, 202);
+            this.gbxColRowAgg.Name = "gbxColRowAgg";
+            this.gbxColRowAgg.Size = new System.Drawing.Size(251, 148);
+            this.gbxColRowAgg.TabIndex = 0;
+            this.gbxColRowAgg.TabStop = false;
+            this.gbxColRowAgg.Text = "Columns, rows, aggregate";
             // 
-            // button3
+            // btnFiltersAggregate
             // 
-            this.button3.Location = new System.Drawing.Point(186, 118);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(59, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "filters...";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnFiltersAggregate.Location = new System.Drawing.Point(186, 118);
+            this.btnFiltersAggregate.Name = "btnFiltersAggregate";
+            this.btnFiltersAggregate.Size = new System.Drawing.Size(59, 23);
+            this.btnFiltersAggregate.TabIndex = 2;
+            this.btnFiltersAggregate.Text = "filters...";
+            this.btnFiltersAggregate.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnFiltersRows
             // 
-            this.button2.Location = new System.Drawing.Point(186, 77);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(59, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "filters...";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnFiltersRows.Location = new System.Drawing.Point(186, 77);
+            this.btnFiltersRows.Name = "btnFiltersRows";
+            this.btnFiltersRows.Size = new System.Drawing.Size(59, 23);
+            this.btnFiltersRows.TabIndex = 2;
+            this.btnFiltersRows.Text = "filters...";
+            this.btnFiltersRows.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnFiltersColumn
             // 
-            this.button1.Location = new System.Drawing.Point(186, 36);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(59, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "filters...";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnFiltersColumn.Location = new System.Drawing.Point(186, 36);
+            this.btnFiltersColumn.Name = "btnFiltersColumn";
+            this.btnFiltersColumn.Size = new System.Drawing.Size(59, 23);
+            this.btnFiltersColumn.TabIndex = 2;
+            this.btnFiltersColumn.Text = "filters...";
+            this.btnFiltersColumn.UseVisualStyleBackColor = true;
             // 
-            // comboBox3
+            // cboAggregate
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(10, 119);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(169, 21);
-            this.comboBox3.TabIndex = 1;
+            this.cboAggregate.FormattingEnabled = true;
+            this.cboAggregate.Location = new System.Drawing.Point(10, 119);
+            this.cboAggregate.Name = "cboAggregate";
+            this.cboAggregate.Size = new System.Drawing.Size(169, 21);
+            this.cboAggregate.TabIndex = 1;
             // 
-            // comboBox2
+            // cboComboRows
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(10, 78);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(169, 21);
-            this.comboBox2.TabIndex = 1;
+            this.cboComboRows.FormattingEnabled = true;
+            this.cboComboRows.Location = new System.Drawing.Point(10, 78);
+            this.cboComboRows.Name = "cboComboRows";
+            this.cboComboRows.Size = new System.Drawing.Size(169, 21);
+            this.cboComboRows.TabIndex = 1;
             // 
-            // label3
+            // lblAggregate
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 102);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(80, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Aggregate data";
+            this.lblAggregate.AutoSize = true;
+            this.lblAggregate.Location = new System.Drawing.Point(7, 102);
+            this.lblAggregate.Name = "lblAggregate";
+            this.lblAggregate.Size = new System.Drawing.Size(80, 13);
+            this.lblAggregate.TabIndex = 0;
+            this.lblAggregate.Text = "Aggregate data";
             // 
-            // comboBox1
+            // cboColumns
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(10, 37);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(169, 21);
-            this.comboBox1.TabIndex = 1;
+            this.cboColumns.FormattingEnabled = true;
+            this.cboColumns.Location = new System.Drawing.Point(10, 37);
+            this.cboColumns.Name = "cboColumns";
+            this.cboColumns.Size = new System.Drawing.Size(169, 21);
+            this.cboColumns.TabIndex = 1;
             // 
-            // label2
+            // lblRows
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 61);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(34, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Rows";
+            this.lblRows.AutoSize = true;
+            this.lblRows.Location = new System.Drawing.Point(7, 61);
+            this.lblRows.Name = "lblRows";
+            this.lblRows.Size = new System.Drawing.Size(34, 13);
+            this.lblRows.TabIndex = 0;
+            this.lblRows.Text = "Rows";
             // 
-            // label1
+            // lblColumns
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Columns";
+            this.lblColumns.AutoSize = true;
+            this.lblColumns.Location = new System.Drawing.Point(7, 20);
+            this.lblColumns.Name = "lblColumns";
+            this.lblColumns.Size = new System.Drawing.Size(47, 13);
+            this.lblColumns.TabIndex = 0;
+            this.lblColumns.Text = "Columns";
             // 
             // gbxAllFields
             // 
-            this.gbxAllFields.Controls.Add(this.checkedListBox1);
+            this.gbxAllFields.Controls.Add(this.lbxImportantFields);
             this.gbxAllFields.Location = new System.Drawing.Point(11, 3);
             this.gbxAllFields.Name = "gbxAllFields";
             this.gbxAllFields.Size = new System.Drawing.Size(251, 193);
@@ -284,239 +280,205 @@
             this.gbxAllFields.TabStop = false;
             this.gbxAllFields.Text = "Select fields important for the report";
             // 
-            // checkedListBox1
+            // lbxImportantFields
             // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(7, 20);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(238, 169);
-            this.checkedListBox1.TabIndex = 0;
-            this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
+            this.lbxImportantFields.FormattingEnabled = true;
+            this.lbxImportantFields.Location = new System.Drawing.Point(7, 20);
+            this.lbxImportantFields.Name = "lbxImportantFields";
+            this.lbxImportantFields.Size = new System.Drawing.Size(238, 169);
+            this.lbxImportantFields.TabIndex = 0;
+            this.lbxImportantFields.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
             // 
             // menuMain
             // 
             this.menuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.toolsToolStripMenuItem});
+            this.mimFile,
+            this.mimOptions});
             this.menuMain.Location = new System.Drawing.Point(0, 0);
             this.menuMain.Name = "menuMain";
             this.menuMain.Size = new System.Drawing.Size(1008, 24);
             this.menuMain.TabIndex = 1;
             this.menuMain.Text = "menuStrip1";
             // 
-            // fileToolStripMenuItem
+            // mimFile
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripMenuItem,
-            this.openToolStripMenuItem,
-            this.openMetadataToolStripMenuItem,
-            this.toolStripSeparator,
-            this.saveToolStripMenuItem,
-            this.saveAsToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.printToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "&File";
+            this.mimFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mimFileNew,
+            this.mimFileOpenReport,
+            this.mimFileOpenMetadata,
+            this.mspOpenSave,
+            this.mimFileSave,
+            this.mimFileSaveAs,
+            this.mspSavePrint,
+            this.mimFilePrint,
+            this.mspPrintExit,
+            this.mimFileExit});
+            this.mimFile.Name = "mimFile";
+            this.mimFile.Size = new System.Drawing.Size(37, 20);
+            this.mimFile.Text = "&File";
             // 
-            // newToolStripMenuItem
+            // mimFileNew
             // 
-            this.newToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripMenuItem.Image")));
-            this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.newToolStripMenuItem.Text = "&New";
+            this.mimFileNew.Image = ((System.Drawing.Image)(resources.GetObject("mimFileNew.Image")));
+            this.mimFileNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mimFileNew.Name = "mimFileNew";
+            this.mimFileNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.mimFileNew.Size = new System.Drawing.Size(201, 22);
+            this.mimFileNew.Text = "&New";
             // 
-            // openToolStripMenuItem
+            // mimFileOpenReport
             // 
-            this.openToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripMenuItem.Image")));
-            this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.openToolStripMenuItem.Text = "&Open Report";
+            this.mimFileOpenReport.Image = ((System.Drawing.Image)(resources.GetObject("mimFileOpenReport.Image")));
+            this.mimFileOpenReport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mimFileOpenReport.Name = "mimFileOpenReport";
+            this.mimFileOpenReport.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.mimFileOpenReport.Size = new System.Drawing.Size(201, 22);
+            this.mimFileOpenReport.Text = "&Open Report";
+            this.mimFileOpenReport.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
-            // openMetadataToolStripMenuItem
+            // mimFileOpenMetadata
             // 
-            this.openMetadataToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openMetadataToolStripMenuItem.Name = "openMetadataToolStripMenuItem";
-            this.openMetadataToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
-            this.openMetadataToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.openMetadataToolStripMenuItem.Text = "Open &Metadata";
-            this.openMetadataToolStripMenuItem.Click += new System.EventHandler(this.openMetadataToolStripMenuItem_Click);
+            this.mimFileOpenMetadata.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mimFileOpenMetadata.Name = "mimFileOpenMetadata";
+            this.mimFileOpenMetadata.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
+            this.mimFileOpenMetadata.Size = new System.Drawing.Size(201, 22);
+            this.mimFileOpenMetadata.Text = "Open &Metadata";
+            this.mimFileOpenMetadata.Click += new System.EventHandler(this.openMetadataToolStripMenuItem_Click);
             // 
-            // toolStripSeparator
+            // mspOpenSave
             // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(198, 6);
+            this.mspOpenSave.Name = "mspOpenSave";
+            this.mspOpenSave.Size = new System.Drawing.Size(198, 6);
             // 
-            // saveToolStripMenuItem
+            // mimFileSave
             // 
-            this.saveToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripMenuItem.Image")));
-            this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.saveToolStripMenuItem.Text = "&Save";
+            this.mimFileSave.Image = ((System.Drawing.Image)(resources.GetObject("mimFileSave.Image")));
+            this.mimFileSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mimFileSave.Name = "mimFileSave";
+            this.mimFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.mimFileSave.Size = new System.Drawing.Size(201, 22);
+            this.mimFileSave.Text = "&Save";
             // 
-            // saveAsToolStripMenuItem
+            // mimFileSaveAs
             // 
-            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.mimFileSaveAs.Name = "mimFileSaveAs";
+            this.mimFileSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.saveAsToolStripMenuItem.Text = "Save &As";
+            this.mimFileSaveAs.Size = new System.Drawing.Size(201, 22);
+            this.mimFileSaveAs.Text = "Save &As";
             // 
-            // toolStripSeparator1
+            // mspSavePrint
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(198, 6);
+            this.mspSavePrint.Name = "mspSavePrint";
+            this.mspSavePrint.Size = new System.Drawing.Size(198, 6);
             // 
-            // printToolStripMenuItem
+            // mimFilePrint
             // 
-            this.printToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripMenuItem.Image")));
-            this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.printToolStripMenuItem.Text = "&Print";
+            this.mimFilePrint.Image = ((System.Drawing.Image)(resources.GetObject("mimFilePrint.Image")));
+            this.mimFilePrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.mimFilePrint.Name = "mimFilePrint";
+            this.mimFilePrint.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.mimFilePrint.Size = new System.Drawing.Size(201, 22);
+            this.mimFilePrint.Text = "&Print";
             // 
-            // toolStripSeparator2
+            // mspPrintExit
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(198, 6);
+            this.mspPrintExit.Name = "mspPrintExit";
+            this.mspPrintExit.Size = new System.Drawing.Size(198, 6);
             // 
-            // exitToolStripMenuItem
+            // mimFileExit
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.exitToolStripMenuItem.Text = "E&xit";
+            this.mimFileExit.Name = "mimFileExit";
+            this.mimFileExit.Size = new System.Drawing.Size(201, 22);
+            this.mimFileExit.Text = "E&xit";
             // 
-            // toolsToolStripMenuItem
+            // mimOptions
             // 
-            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optionsToolStripMenuItem,
-            this.aboutToolStripMenuItem1});
-            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.toolsToolStripMenuItem.Text = "&Options";
+            this.mimOptions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mimOptionsOptions,
+            this.mimOptionsAbout});
+            this.mimOptions.Name = "mimOptions";
+            this.mimOptions.Size = new System.Drawing.Size(61, 20);
+            this.mimOptions.Text = "&Options";
             // 
-            // optionsToolStripMenuItem
+            // mimOptionsOptions
             // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.optionsToolStripMenuItem.Text = "&Options";
+            this.mimOptionsOptions.Name = "mimOptionsOptions";
+            this.mimOptionsOptions.Size = new System.Drawing.Size(152, 22);
+            this.mimOptionsOptions.Text = "&Options";
             // 
-            // aboutToolStripMenuItem1
+            // mimOptionsAbout
             // 
-            this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.aboutToolStripMenuItem1.Text = "&About";
+            this.mimOptionsAbout.Name = "mimOptionsAbout";
+            this.mimOptionsAbout.Size = new System.Drawing.Size(152, 22);
+            this.mimOptionsAbout.Text = "&About";
             // 
             // tbrMain
             // 
             this.tbrMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripButton,
-            this.openToolStripButton,
-            this.saveToolStripButton,
-            this.printToolStripButton,
-            this.toolStripSeparator3,
-            this.cutToolStripButton,
-            this.copyToolStripButton,
-            this.pasteToolStripButton,
-            this.toolStripSeparator4,
-            this.helpToolStripButton});
+            this.tbxNew,
+            this.tbxOpenReport,
+            this.tbxSave,
+            this.tbxPrint,
+            this.mspToolbar,
+            this.tbxHelp});
             this.tbrMain.Location = new System.Drawing.Point(0, 24);
             this.tbrMain.Name = "tbrMain";
             this.tbrMain.Size = new System.Drawing.Size(1008, 25);
             this.tbrMain.TabIndex = 2;
             this.tbrMain.Text = "toolStrip1";
             // 
-            // newToolStripButton
+            // tbxNew
             // 
-            this.newToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.newToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripButton.Image")));
-            this.newToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.newToolStripButton.Name = "newToolStripButton";
-            this.newToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.newToolStripButton.Text = "&New";
+            this.tbxNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tbxNew.Image = ((System.Drawing.Image)(resources.GetObject("tbxNew.Image")));
+            this.tbxNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbxNew.Name = "tbxNew";
+            this.tbxNew.Size = new System.Drawing.Size(23, 22);
+            this.tbxNew.Text = "&New";
             // 
-            // openToolStripButton
+            // tbxOpenReport
             // 
-            this.openToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.openToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripButton.Image")));
-            this.openToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openToolStripButton.Name = "openToolStripButton";
-            this.openToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.openToolStripButton.Text = "&Open";
+            this.tbxOpenReport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tbxOpenReport.Image = ((System.Drawing.Image)(resources.GetObject("tbxOpenReport.Image")));
+            this.tbxOpenReport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbxOpenReport.Name = "tbxOpenReport";
+            this.tbxOpenReport.Size = new System.Drawing.Size(23, 22);
+            this.tbxOpenReport.Text = "&Open";
+            this.tbxOpenReport.Click += new System.EventHandler(this.openToolStripButton_Click);
             // 
-            // saveToolStripButton
+            // tbxSave
             // 
-            this.saveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.saveToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripButton.Image")));
-            this.saveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.saveToolStripButton.Name = "saveToolStripButton";
-            this.saveToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.saveToolStripButton.Text = "&Save";
+            this.tbxSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tbxSave.Image = ((System.Drawing.Image)(resources.GetObject("tbxSave.Image")));
+            this.tbxSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbxSave.Name = "tbxSave";
+            this.tbxSave.Size = new System.Drawing.Size(23, 22);
+            this.tbxSave.Text = "&Save";
             // 
-            // printToolStripButton
+            // tbxPrint
             // 
-            this.printToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
-            this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.printToolStripButton.Name = "printToolStripButton";
-            this.printToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.printToolStripButton.Text = "&Print";
+            this.tbxPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tbxPrint.Image = ((System.Drawing.Image)(resources.GetObject("tbxPrint.Image")));
+            this.tbxPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbxPrint.Name = "tbxPrint";
+            this.tbxPrint.Size = new System.Drawing.Size(23, 22);
+            this.tbxPrint.Text = "&Print";
             // 
-            // toolStripSeparator3
+            // mspToolbar
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            this.mspToolbar.Name = "mspToolbar";
+            this.mspToolbar.Size = new System.Drawing.Size(6, 25);
             // 
-            // cutToolStripButton
+            // tbxHelp
             // 
-            this.cutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.cutToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("cutToolStripButton.Image")));
-            this.cutToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.cutToolStripButton.Name = "cutToolStripButton";
-            this.cutToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.cutToolStripButton.Text = "C&ut";
-            // 
-            // copyToolStripButton
-            // 
-            this.copyToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.copyToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripButton.Image")));
-            this.copyToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.copyToolStripButton.Name = "copyToolStripButton";
-            this.copyToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.copyToolStripButton.Text = "&Copy";
-            // 
-            // pasteToolStripButton
-            // 
-            this.pasteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.pasteToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("pasteToolStripButton.Image")));
-            this.pasteToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.pasteToolStripButton.Name = "pasteToolStripButton";
-            this.pasteToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.pasteToolStripButton.Text = "&Paste";
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
-            // helpToolStripButton
-            // 
-            this.helpToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.helpToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("helpToolStripButton.Image")));
-            this.helpToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.helpToolStripButton.Name = "helpToolStripButton";
-            this.helpToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.helpToolStripButton.Text = "He&lp";
-            this.helpToolStripButton.Click += new System.EventHandler(this.helpToolStripButton_Click);
+            this.tbxHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tbxHelp.Image = ((System.Drawing.Image)(resources.GetObject("tbxHelp.Image")));
+            this.tbxHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tbxHelp.Name = "tbxHelp";
+            this.tbxHelp.Size = new System.Drawing.Size(23, 22);
+            this.tbxHelp.Text = "He&lp";
+            this.tbxHelp.Click += new System.EventHandler(this.helpToolStripButton_Click);
             // 
             // ofdReport
             // 
@@ -540,9 +502,9 @@
             this.Text = "OLOLAP";
             this.Resize += new System.EventHandler(this.MainResize);
             this.pnlLeft.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gbxAdditional.ResumeLayout(false);
+            this.gbxColRowAgg.ResumeLayout(false);
+            this.gbxColRowAgg.PerformLayout();
             this.gbxAllFields.ResumeLayout(false);
             this.menuMain.ResumeLayout(false);
             this.menuMain.PerformLayout();
@@ -558,50 +520,46 @@
         private System.Windows.Forms.Panel pnlLeft;
         private System.Windows.Forms.GroupBox gbxAllFields;
         private System.Windows.Forms.MenuStrip menuMain;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem mimFile;
+        private System.Windows.Forms.ToolStripMenuItem mimFileNew;
+        private System.Windows.Forms.ToolStripMenuItem mimFileOpenReport;
+        private System.Windows.Forms.ToolStripSeparator mspOpenSave;
+        private System.Windows.Forms.ToolStripMenuItem mimFileSave;
+        private System.Windows.Forms.ToolStripMenuItem mimFileSaveAs;
+        private System.Windows.Forms.ToolStripSeparator mspSavePrint;
+        private System.Windows.Forms.ToolStripMenuItem mimFilePrint;
+        private System.Windows.Forms.ToolStripSeparator mspPrintExit;
+        private System.Windows.Forms.ToolStripMenuItem mimFileExit;
+        private System.Windows.Forms.ToolStripMenuItem mimOptions;
+        private System.Windows.Forms.ToolStripMenuItem mimOptionsOptions;
+        private System.Windows.Forms.ToolStripMenuItem mimOptionsAbout;
         private System.Windows.Forms.ToolStrip tbrMain;
-        private System.Windows.Forms.ToolStripButton newToolStripButton;
-        private System.Windows.Forms.ToolStripButton openToolStripButton;
-        private System.Windows.Forms.ToolStripButton saveToolStripButton;
-        private System.Windows.Forms.ToolStripButton printToolStripButton;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripButton cutToolStripButton;
-        private System.Windows.Forms.ToolStripButton copyToolStripButton;
-        private System.Windows.Forms.ToolStripButton pasteToolStripButton;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripButton helpToolStripButton;
-        private System.Windows.Forms.Splitter splitter1;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.ToolStripMenuItem openMetadataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton tbxNew;
+        private System.Windows.Forms.ToolStripButton tbxOpenReport;
+        private System.Windows.Forms.ToolStripButton tbxSave;
+        private System.Windows.Forms.ToolStripButton tbxPrint;
+        private System.Windows.Forms.ToolStripSeparator mspToolbar;
+        private System.Windows.Forms.ToolStripButton tbxHelp;
+        private System.Windows.Forms.Splitter splLeftPanel;
+        private System.Windows.Forms.CheckedListBox lbxImportantFields;
+        private System.Windows.Forms.GroupBox gbxColRowAgg;
+        private System.Windows.Forms.Label lblColumns;
+        private System.Windows.Forms.ComboBox cboColumns;
+        private System.Windows.Forms.Button btnFiltersColumn;
+        private System.Windows.Forms.Button btnFiltersAggregate;
+        private System.Windows.Forms.Button btnFiltersRows;
+        private System.Windows.Forms.ComboBox cboAggregate;
+        private System.Windows.Forms.ComboBox cboComboRows;
+        private System.Windows.Forms.Label lblAggregate;
+        private System.Windows.Forms.Label lblRows;
+        private System.Windows.Forms.GroupBox gbxAdditional;
+        private System.Windows.Forms.ListBox lbxAdditionalFilters;
+        private System.Windows.Forms.Button btnMainFiltersDelete;
+        private System.Windows.Forms.Button btnMainFiltersEdit;
+        private System.Windows.Forms.Button btnMainFiltersAdd;
+        private System.Windows.Forms.Button btnReload;
+        private System.Windows.Forms.Button btnGenerate;
+        private System.Windows.Forms.ToolStripMenuItem mimFileOpenMetadata;
         private System.Windows.Forms.OpenFileDialog ofdReport;
         private System.Windows.Forms.SaveFileDialog sfdReport;
         private System.Windows.Forms.OpenFileDialog ofdMetadata;
