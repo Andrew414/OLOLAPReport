@@ -162,7 +162,7 @@ namespace WFReport
                 db.Tables.Add(table.Name, table);
 
                 currentDB = db;
-                currentPathMetadata = filename;
+                currentPathMetadata = filename;             
             }
         }
     }

@@ -58,25 +58,24 @@
             this.mspOpenSave = new System.Windows.Forms.ToolStripSeparator();
             this.mimFileSave = new System.Windows.Forms.ToolStripMenuItem();
             this.mimFileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
-            this.mspSavePrint = new System.Windows.Forms.ToolStripSeparator();
-            this.mimFilePrint = new System.Windows.Forms.ToolStripMenuItem();
-            this.mspPrintExit = new System.Windows.Forms.ToolStripSeparator();
+            this.mspSaveExit = new System.Windows.Forms.ToolStripSeparator();
             this.mimFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.mimOptions = new System.Windows.Forms.ToolStripMenuItem();
-            this.mimOptionsOptions = new System.Windows.Forms.ToolStripMenuItem();
+            this.mimOptionsDev = new System.Windows.Forms.ToolStripMenuItem();
             this.mimOptionsAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.tbrMain = new System.Windows.Forms.ToolStrip();
             this.tbxNew = new System.Windows.Forms.ToolStripButton();
             this.tbxOpenReport = new System.Windows.Forms.ToolStripButton();
             this.tbxSave = new System.Windows.Forms.ToolStripButton();
-            this.tbxPrint = new System.Windows.Forms.ToolStripButton();
             this.mspToolbar = new System.Windows.Forms.ToolStripSeparator();
             this.tbxHelp = new System.Windows.Forms.ToolStripButton();
+            this.mspInfo = new System.Windows.Forms.ToolStripSeparator();
+            this.lblModeInfo = new System.Windows.Forms.ToolStripLabel();
             this.ofdReport = new System.Windows.Forms.OpenFileDialog();
             this.sfdReport = new System.Windows.Forms.SaveFileDialog();
             this.ofdMetadata = new System.Windows.Forms.OpenFileDialog();
             this.grdReport = new System.Windows.Forms.DataGridView();
-            this.tbxSqlQueryTemp = new System.Windows.Forms.TextBox();
+            this.tbxSqlQueryDevMode = new System.Windows.Forms.TextBox();
             this.pnlLeft.SuspendLayout();
             this.gbxAdditional.SuspendLayout();
             this.gbxColRowAgg.SuspendLayout();
@@ -316,9 +315,7 @@
             this.mspOpenSave,
             this.mimFileSave,
             this.mimFileSaveAs,
-            this.mspSavePrint,
-            this.mimFilePrint,
-            this.mspPrintExit,
+            this.mspSaveExit,
             this.mimFileExit});
             this.mimFile.Name = "mimFile";
             this.mimFile.Size = new System.Drawing.Size(37, 20);
@@ -374,50 +371,40 @@
             this.mimFileSaveAs.Size = new System.Drawing.Size(201, 22);
             this.mimFileSaveAs.Text = "Save &As";
             // 
-            // mspSavePrint
+            // mspSaveExit
             // 
-            this.mspSavePrint.Name = "mspSavePrint";
-            this.mspSavePrint.Size = new System.Drawing.Size(198, 6);
-            // 
-            // mimFilePrint
-            // 
-            this.mimFilePrint.Image = ((System.Drawing.Image)(resources.GetObject("mimFilePrint.Image")));
-            this.mimFilePrint.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.mimFilePrint.Name = "mimFilePrint";
-            this.mimFilePrint.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.mimFilePrint.Size = new System.Drawing.Size(201, 22);
-            this.mimFilePrint.Text = "&Print";
-            // 
-            // mspPrintExit
-            // 
-            this.mspPrintExit.Name = "mspPrintExit";
-            this.mspPrintExit.Size = new System.Drawing.Size(198, 6);
+            this.mspSaveExit.Name = "mspSaveExit";
+            this.mspSaveExit.Size = new System.Drawing.Size(198, 6);
             // 
             // mimFileExit
             // 
             this.mimFileExit.Name = "mimFileExit";
+            this.mimFileExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
             this.mimFileExit.Size = new System.Drawing.Size(201, 22);
             this.mimFileExit.Text = "E&xit";
             // 
             // mimOptions
             // 
             this.mimOptions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mimOptionsOptions,
+            this.mimOptionsDev,
             this.mimOptionsAbout});
             this.mimOptions.Name = "mimOptions";
             this.mimOptions.Size = new System.Drawing.Size(61, 20);
             this.mimOptions.Text = "&Options";
             // 
-            // mimOptionsOptions
+            // mimOptionsDev
             // 
-            this.mimOptionsOptions.Name = "mimOptionsOptions";
-            this.mimOptionsOptions.Size = new System.Drawing.Size(116, 22);
-            this.mimOptionsOptions.Text = "&Options";
+            this.mimOptionsDev.Name = "mimOptionsDev";
+            this.mimOptionsDev.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.mimOptionsDev.Size = new System.Drawing.Size(225, 22);
+            this.mimOptionsDev.Text = "Enable raw &sql mode";
+            this.mimOptionsDev.Click += new System.EventHandler(this.mimOptionsDev_Click);
             // 
             // mimOptionsAbout
             // 
             this.mimOptionsAbout.Name = "mimOptionsAbout";
-            this.mimOptionsAbout.Size = new System.Drawing.Size(116, 22);
+            this.mimOptionsAbout.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.mimOptionsAbout.Size = new System.Drawing.Size(225, 22);
             this.mimOptionsAbout.Text = "&About";
             // 
             // tbrMain
@@ -426,9 +413,10 @@
             this.tbxNew,
             this.tbxOpenReport,
             this.tbxSave,
-            this.tbxPrint,
             this.mspToolbar,
-            this.tbxHelp});
+            this.tbxHelp,
+            this.mspInfo,
+            this.lblModeInfo});
             this.tbrMain.Location = new System.Drawing.Point(0, 24);
             this.tbrMain.Name = "tbrMain";
             this.tbrMain.Size = new System.Drawing.Size(1008, 25);
@@ -463,15 +451,6 @@
             this.tbxSave.Size = new System.Drawing.Size(23, 22);
             this.tbxSave.Text = "&Save";
             // 
-            // tbxPrint
-            // 
-            this.tbxPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tbxPrint.Image = ((System.Drawing.Image)(resources.GetObject("tbxPrint.Image")));
-            this.tbxPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tbxPrint.Name = "tbxPrint";
-            this.tbxPrint.Size = new System.Drawing.Size(23, 22);
-            this.tbxPrint.Text = "&Print";
-            // 
             // mspToolbar
             // 
             this.mspToolbar.Name = "mspToolbar";
@@ -486,6 +465,17 @@
             this.tbxHelp.Size = new System.Drawing.Size(23, 22);
             this.tbxHelp.Text = "He&lp";
             this.tbxHelp.Click += new System.EventHandler(this.helpToolStripButton_Click);
+            // 
+            // mspInfo
+            // 
+            this.mspInfo.Name = "mspInfo";
+            this.mspInfo.Size = new System.Drawing.Size(6, 25);
+            // 
+            // lblModeInfo
+            // 
+            this.lblModeInfo.Name = "lblModeInfo";
+            this.lblModeInfo.Size = new System.Drawing.Size(262, 22);
+            this.lblModeInfo.Text = "Raw Sql mode disabled. Press Ctrl+D to enable it";
             // 
             // ofdReport
             // 
@@ -503,25 +493,28 @@
             this.grdReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdReport.Location = new System.Drawing.Point(277, 52);
             this.grdReport.Name = "grdReport";
+            this.grdReport.RowHeadersVisible = false;
             this.grdReport.Size = new System.Drawing.Size(731, 509);
             this.grdReport.TabIndex = 3;
             // 
-            // tbxSqlQueryTemp
+            // tbxSqlQueryDevMode
             // 
-            this.tbxSqlQueryTemp.Location = new System.Drawing.Point(277, 52);
-            this.tbxSqlQueryTemp.Multiline = true;
-            this.tbxSqlQueryTemp.Name = "tbxSqlQueryTemp";
-            this.tbxSqlQueryTemp.ReadOnly = true;
-            this.tbxSqlQueryTemp.Size = new System.Drawing.Size(471, 295);
-            this.tbxSqlQueryTemp.TabIndex = 4;
-            this.tbxSqlQueryTemp.Text = "<Report data>";
+            this.tbxSqlQueryDevMode.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxSqlQueryDevMode.Location = new System.Drawing.Point(277, 52);
+            this.tbxSqlQueryDevMode.Multiline = true;
+            this.tbxSqlQueryDevMode.Name = "tbxSqlQueryDevMode";
+            this.tbxSqlQueryDevMode.ReadOnly = true;
+            this.tbxSqlQueryDevMode.Size = new System.Drawing.Size(471, 295);
+            this.tbxSqlQueryDevMode.TabIndex = 4;
+            this.tbxSqlQueryDevMode.Text = "<Report SQL>";
+            this.tbxSqlQueryDevMode.Visible = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 561);
-            this.Controls.Add(this.tbxSqlQueryTemp);
+            this.Controls.Add(this.tbxSqlQueryDevMode);
             this.Controls.Add(this.grdReport);
             this.Controls.Add(this.tbrMain);
             this.Controls.Add(this.pnlLeft);
@@ -558,18 +551,15 @@
         private System.Windows.Forms.ToolStripSeparator mspOpenSave;
         private System.Windows.Forms.ToolStripMenuItem mimFileSave;
         private System.Windows.Forms.ToolStripMenuItem mimFileSaveAs;
-        private System.Windows.Forms.ToolStripSeparator mspSavePrint;
-        private System.Windows.Forms.ToolStripMenuItem mimFilePrint;
-        private System.Windows.Forms.ToolStripSeparator mspPrintExit;
+        private System.Windows.Forms.ToolStripSeparator mspSaveExit;
         private System.Windows.Forms.ToolStripMenuItem mimFileExit;
         private System.Windows.Forms.ToolStripMenuItem mimOptions;
-        private System.Windows.Forms.ToolStripMenuItem mimOptionsOptions;
+        private System.Windows.Forms.ToolStripMenuItem mimOptionsDev;
         private System.Windows.Forms.ToolStripMenuItem mimOptionsAbout;
         private System.Windows.Forms.ToolStrip tbrMain;
         private System.Windows.Forms.ToolStripButton tbxNew;
         private System.Windows.Forms.ToolStripButton tbxOpenReport;
         private System.Windows.Forms.ToolStripButton tbxSave;
-        private System.Windows.Forms.ToolStripButton tbxPrint;
         private System.Windows.Forms.ToolStripSeparator mspToolbar;
         private System.Windows.Forms.ToolStripButton tbxHelp;
         private System.Windows.Forms.Splitter splLeftPanel;
@@ -596,7 +586,9 @@
         private System.Windows.Forms.SaveFileDialog sfdReport;
         private System.Windows.Forms.OpenFileDialog ofdMetadata;
         private System.Windows.Forms.DataGridView grdReport;
-        private System.Windows.Forms.TextBox tbxSqlQueryTemp;
+        private System.Windows.Forms.TextBox tbxSqlQueryDevMode;
+        private System.Windows.Forms.ToolStripSeparator mspInfo;
+        private System.Windows.Forms.ToolStripLabel lblModeInfo;
     }
 }
 

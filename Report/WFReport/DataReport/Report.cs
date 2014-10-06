@@ -31,8 +31,7 @@ FROM
 	INNER JOIN Store ON Store.Id = Operation.StoreId
 	INNER JOIN Item  ON Item.Id  = Operation.ItemId
 
-WHERE
-    <WHERESTATEMENT>
+<WHERESTATEMENT>
 
 GROUP BY
 	<COLUMNS>,

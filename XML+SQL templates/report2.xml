@@ -3,13 +3,13 @@
     <dbname metadata="metadata.xml">AppleShop</dbname>
     <visible>
         <rows>
-            <table>Store</table>
-            <column>Address</column>
-        </rows>
-        <columns>
             <table>Operation</table>
             <column>Date</column>
             <group>Month</group>
+        </rows>
+        <columns>
+            <table>Store</table>
+            <column>Address</column>
         </columns>
         <aggregate>
             <name>Amount</name>

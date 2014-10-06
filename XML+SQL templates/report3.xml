@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report>
+    <dbname metadata="metadata.xml">AppleShop</dbname>
+    <visible>
+        <rows>
+            <table>Operation</table>
+            <column>Date</column>
+            <group>Month</group>
+        </rows>
+        <columns>
+            <table>Store</table>
+            <column>Country</column>
+        </columns>
+        <aggregate>
+            <name>Price</name>
+        </aggregate>
+    </visible>
+    <fixeddata>
+        
+    </fixeddata>
+</report>

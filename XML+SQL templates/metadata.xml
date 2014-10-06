@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
     <dbname>AppleShop</dbname>
-    <dbpath>shop.dat</dbpath>
+    <dbpath>shop.db</dbpath>
     <datatables>
         <table>
             <name>Buyer</name>

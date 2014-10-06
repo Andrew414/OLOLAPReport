@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
+using System.Data.SQLite;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -32,8 +34,8 @@ namespace WFReport
             grdReport.Height = this.Height - 92;
             grdReport.Width = this.Width - 294;
 
-            tbxSqlQueryTemp.Height = grdReport.Height;
-            tbxSqlQueryTemp.Width = grdReport.Width;
+            tbxSqlQueryDevMode.Height = grdReport.Height;
+            tbxSqlQueryDevMode.Width = grdReport.Width;
         }
 
         private void splitter1_Move(object sender, EventArgs e)
@@ -360,23 +362,23 @@ namespace WFReport
             return "TRUE";
         }
 
-        private void btnGenerate_Click(object sender, EventArgs e)
+        private string BuildSQLQuery()
         {
             string sqlQuery = WFReport.DataReport.Report.SQLTEMPLATEREPORT;
 
-            sqlQuery = sqlQuery.Replace("<COLUMNS>"  , ConvertGroupBy(currentReport.cTable, currentReport.cColumn, currentReport.cGroup));
+            sqlQuery = sqlQuery.Replace("<COLUMNS>", ConvertGroupBy(currentReport.cTable, currentReport.cColumn, currentReport.cGroup));
             sqlQuery = sqlQuery.Replace("<ROWS>", ConvertGroupBy(currentReport.rTable, currentReport.rColumn, currentReport.rGroup));
             sqlQuery = sqlQuery.Replace("<AGGREGATE>", currentReport.aTable.Name + "." + currentReport.aColumn.Name);
 
-            string whereQuery = "";
+            string whereQuery = "WHERE\r\n\t";
             if (currentReport.restrictions.Count == 0)
             {
-                whereQuery = "TRUE";
+                whereQuery = "";
             }
             else
             {
                 var container = currentReport.restrictions.Select(x => ConvertRestrictionToWhereString(x));
-                
+
                 foreach (var i in container)
                 {
                     if (i != container.First())
@@ -384,13 +386,114 @@ namespace WFReport
 
                     whereQuery += i;
                 }
-                
+
             }
 
             sqlQuery = sqlQuery.Replace("<WHERESTATEMENT>", whereQuery);
 
-            tbxSqlQueryTemp.Text = sqlQuery;
+            return sqlQuery;
+        }
+
+        private void LoadDataToGrid(List<string> col, List<string> row, List<string> val)
+        {
+            grdReport.Rows.Clear();
+            grdReport.Columns.Clear();
+
+            Dictionary<int, string> cols = new Dictionary<int, string>();
+            Dictionary<int, string> rows = new Dictionary<int, string>();
+            foreach (var i in col)
+                if (!cols.Values.Contains(i))
+                    cols.Add(cols.Count, i);
+
+            foreach (var i in row)
+                if (!rows.Values.Contains(i))
+                    rows.Add(rows.Count, i);
+
+            grdReport.Columns.Add(" ", " ");
+
+            foreach (var i in cols)
+                grdReport.Columns.Add(cols[i.Key], cols[i.Key]);
+
+            foreach (var i in rows)
+            {
+                string[] rowdata = new string[grdReport.Columns.Count];
+
+                rowdata[0] = i.Value;
+
+                for (int j = 1; j < grdReport.Columns.Count; j++)
+                {
+                    string rname = i.Value;
+                    string cname = cols[j-1];
+
+                    rowdata[j] = "0";
+
+                    for (int k = 0; k < col.Count; k++)
+                    {
+                        if (row[k] == rname && col[k] == cname)
+                            rowdata[j] = val[k];
+                    }
+                }
+
+                grdReport.Rows.Add(rowdata);
+            }
+        }
+
+        private void btnGenerate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string query = BuildSQLQuery();
+                tbxSqlQueryDevMode.Text = query;
+
+                string databaseName = currentDB.Path;
+                using (SQLiteConnection connection = new SQLiteConnection(string.Format("Data Source={0};", databaseName)))
+                {
+                    connection.Open();
+
+                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                    {
+                        SQLiteDataReader reader = command.ExecuteReader();
+
+                        List<string> columns = new List<string>();
+                        List<string> rows = new List<string>();
+                        List<string> values = new List<string>();
+
+                        foreach (DbDataRecord record in reader)
+                        {
+                            columns.Add(record[0].ToString());
+                            rows.Add(record[1].ToString());
+                            values.Add(record[2].ToString());
+                        }
+
+                        LoadDataToGrid(columns, rows, values);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occured during fetching the data for the report:\n" + ex.Message,
+                    "Cannot build the report graph", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+
             //MessageBox.Show(sqlQuery);
+        }
+
+        private void mimOptionsDev_Click(object sender, EventArgs e)
+        {
+            if (tbxSqlQueryDevMode.Visible)
+            {
+                tbxSqlQueryDevMode.Visible = false;
+                mimOptionsDev.Text = "Enable raw &sql mode";
+                lblModeInfo.Text = "Raw Sql mode disabled. Press Ctrl+D to enable it";
+            }
+            else
+            {
+                tbxSqlQueryDevMode.Visible = true;
+                mimOptionsDev.Text = "Disable raw &sql mode";
+                lblModeInfo.Text = "Raw Sql mode enabled. Press Ctrl+D to disable it";
+            }
         }
 
     }
