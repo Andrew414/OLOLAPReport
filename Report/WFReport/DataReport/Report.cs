@@ -20,6 +20,24 @@ namespace WFReport.DataReport
         public String rGroup = null;
         public String cGroup = null;
 
+        public static String SQLTEMPLATEREPORT = 
+@"SELECT 
+	<COLUMNS>,
+	<ROWS>,
+	count(<AGGREGATE>)
+FROM
+	Operation
+	INNER JOIN Buyer ON Buyer.Id = Operation.BuyerId
+	INNER JOIN Store ON Store.Id = Operation.StoreId
+	INNER JOIN Item  ON Item.Id  = Operation.ItemId
+
+WHERE
+    <WHERESTATEMENT>
+
+GROUP BY
+	<COLUMNS>,
+	<ROWS>;";
+
         public List<Restriction> restrictions = new List<Restriction>(); 
     }
 }

@@ -29,6 +29,11 @@ namespace WFReport
         {
             pnlLeft.Height = this.Height;
             this.Text = this.Width.ToString() + "x" + this.Height.ToString();
+            grdReport.Height = this.Height - 92;
+            grdReport.Width = this.Width - 294;
+
+            tbxSqlQueryTemp.Height = grdReport.Height;
+            tbxSqlQueryTemp.Width = grdReport.Width;
         }
 
         private void splitter1_Move(object sender, EventArgs e)
@@ -255,7 +260,10 @@ namespace WFReport
             }
         }
 
-        
+        private void RefreshData()
+        {
+
+        }
 
         private void UpdateUIwithMetadata()
         {
@@ -284,20 +292,105 @@ namespace WFReport
                     }
                 }
             }
-
-            
-
-            
         }
 
         private void UpdateUIwithReportData()
         {
             UpdateUIwithMetadata();
+
+            cboAggregate.SelectedIndex = cboAggregate.Items.IndexOf(currentReport.aTable.Name + ": " + currentReport.aColumn.Name);
+            cboColumns  .SelectedIndex = cboColumns  .Items.IndexOf(currentReport.cTable.Name + ": " + currentReport.cColumn.Name);
+            cboRows     .SelectedIndex = cboRows     .Items.IndexOf(currentReport.rTable.Name + ": " + currentReport.rColumn.Name);
+
+            RefreshData();
         }
 
         private void openToolStripButton_Click(object sender, EventArgs e)
         {
             openToolStripMenuItem_Click(sender, e);
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private string ConvertGroupBy(WFReport.Metadata.Table table, WFReport.Metadata.Column column, string group)
+        {
+            if (!String.IsNullOrWhiteSpace(group) && column.Type == Metadata.ColumnType.DateColumn)
+            {
+                switch (group)
+                {
+                    case "Month":
+                        return "strftime(\"%Y-%m\", " +
+                            table.Name + "." + column.Name + ")";
+                    case "Year":
+                        return "strftime(\"%Y\", " +
+                            table.Name + "." + column.Name + ")";
+                    case "Day":
+                        return "strftime(\"%Y-%m-%d\", " +
+                           table.Name + "." + column.Name + ")";
+                    default:
+                        return table.Name + "." + column.Name;
+                }
+            }
+
+            return table.Name + "." + column.Name; 
+        }
+
+        string ConvertRestrictionToWhereString(WFReport.DataReport.Restriction rest)
+        {
+            if (rest is WFReport.DataReport.FromToRestriction)
+            {
+                WFReport.DataReport.FromToRestriction fromto = rest as WFReport.DataReport.FromToRestriction;
+                return "(" + fromto.table.Name + "." + fromto.column.Name + " >= '" + fromto.fromValue +
+                    "' AND " +      fromto.table.Name + "." + fromto.column.Name + " <= '" + fromto.toValue + "')";
+            }
+
+            if (rest is WFReport.DataReport.OptionsRestriction)
+            {
+                WFReport.DataReport.OptionsRestriction opts = rest as WFReport.DataReport.OptionsRestriction;
+                string res = "";
+
+                foreach (var i in opts.options)
+                    res += " OR " + opts.table.Name + "." + opts.column.Name + " = '" + i + "'";
+                return "(" + res.Substring(4) + ")";
+            }
+
+            return "TRUE";
+        }
+
+        private void btnGenerate_Click(object sender, EventArgs e)
+        {
+            string sqlQuery = WFReport.DataReport.Report.SQLTEMPLATEREPORT;
+
+            sqlQuery = sqlQuery.Replace("<COLUMNS>"  , ConvertGroupBy(currentReport.cTable, currentReport.cColumn, currentReport.cGroup));
+            sqlQuery = sqlQuery.Replace("<ROWS>", ConvertGroupBy(currentReport.rTable, currentReport.rColumn, currentReport.rGroup));
+            sqlQuery = sqlQuery.Replace("<AGGREGATE>", currentReport.aTable.Name + "." + currentReport.aColumn.Name);
+
+            string whereQuery = "";
+            if (currentReport.restrictions.Count == 0)
+            {
+                whereQuery = "TRUE";
+            }
+            else
+            {
+                var container = currentReport.restrictions.Select(x => ConvertRestrictionToWhereString(x));
+                
+                foreach (var i in container)
+                {
+                    if (i != container.First())
+                        whereQuery += " AND ";
+
+                    whereQuery += i;
+                }
+                
+            }
+
+            sqlQuery = sqlQuery.Replace("<WHERESTATEMENT>", whereQuery);
+
+            tbxSqlQueryTemp.Text = sqlQuery;
+            //MessageBox.Show(sqlQuery);
         }
 
     }

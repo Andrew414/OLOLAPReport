@@ -15,12 +15,11 @@
         </aggregate>
     </visible>
     <fixeddata>
-        <restriction>
+        <options>
             <table>Item</table>
             <column>Model</column>
-            <options>
-                <option>iPhone</option>
-            </options>
-        </restriction>
+            
+            <option>iPhone 6</option>
+        </options>
     </fixeddata>
 </report>

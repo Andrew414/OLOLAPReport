@@ -75,12 +75,15 @@
             this.ofdReport = new System.Windows.Forms.OpenFileDialog();
             this.sfdReport = new System.Windows.Forms.SaveFileDialog();
             this.ofdMetadata = new System.Windows.Forms.OpenFileDialog();
+            this.grdReport = new System.Windows.Forms.DataGridView();
+            this.tbxSqlQueryTemp = new System.Windows.Forms.TextBox();
             this.pnlLeft.SuspendLayout();
             this.gbxAdditional.SuspendLayout();
             this.gbxColRowAgg.SuspendLayout();
             this.gbxAllFields.SuspendLayout();
             this.menuMain.SuspendLayout();
             this.tbrMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdReport)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlLeft
@@ -114,6 +117,7 @@
             this.btnGenerate.TabIndex = 2;
             this.btnGenerate.Text = "Generate graph";
             this.btnGenerate.UseVisualStyleBackColor = true;
+            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
             // 
             // splLeftPanel
             // 
@@ -407,13 +411,13 @@
             // mimOptionsOptions
             // 
             this.mimOptionsOptions.Name = "mimOptionsOptions";
-            this.mimOptionsOptions.Size = new System.Drawing.Size(152, 22);
+            this.mimOptionsOptions.Size = new System.Drawing.Size(116, 22);
             this.mimOptionsOptions.Text = "&Options";
             // 
             // mimOptionsAbout
             // 
             this.mimOptionsAbout.Name = "mimOptionsAbout";
-            this.mimOptionsAbout.Size = new System.Drawing.Size(152, 22);
+            this.mimOptionsAbout.Size = new System.Drawing.Size(116, 22);
             this.mimOptionsAbout.Text = "&About";
             // 
             // tbrMain
@@ -491,18 +495,42 @@
             // 
             this.ofdMetadata.FileName = "openFileDialog1";
             // 
+            // grdReport
+            // 
+            this.grdReport.AllowUserToAddRows = false;
+            this.grdReport.AllowUserToDeleteRows = false;
+            this.grdReport.AllowUserToOrderColumns = true;
+            this.grdReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdReport.Location = new System.Drawing.Point(277, 52);
+            this.grdReport.Name = "grdReport";
+            this.grdReport.Size = new System.Drawing.Size(731, 509);
+            this.grdReport.TabIndex = 3;
+            // 
+            // tbxSqlQueryTemp
+            // 
+            this.tbxSqlQueryTemp.Location = new System.Drawing.Point(277, 52);
+            this.tbxSqlQueryTemp.Multiline = true;
+            this.tbxSqlQueryTemp.Name = "tbxSqlQueryTemp";
+            this.tbxSqlQueryTemp.ReadOnly = true;
+            this.tbxSqlQueryTemp.Size = new System.Drawing.Size(471, 295);
+            this.tbxSqlQueryTemp.TabIndex = 4;
+            this.tbxSqlQueryTemp.Text = "<Report data>";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 561);
+            this.Controls.Add(this.tbxSqlQueryTemp);
+            this.Controls.Add(this.grdReport);
             this.Controls.Add(this.tbrMain);
             this.Controls.Add(this.pnlLeft);
             this.Controls.Add(this.menuMain);
             this.MainMenuStrip = this.menuMain;
-            this.MinimumSize = new System.Drawing.Size(1024, 600);
+            this.MinimumSize = new System.Drawing.Size(512, 600);
             this.Name = "MainForm";
             this.Text = "OLOLAP";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.Resize += new System.EventHandler(this.MainResize);
             this.pnlLeft.ResumeLayout(false);
             this.gbxAdditional.ResumeLayout(false);
@@ -513,6 +541,7 @@
             this.menuMain.PerformLayout();
             this.tbrMain.ResumeLayout(false);
             this.tbrMain.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdReport)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -566,6 +595,8 @@
         private System.Windows.Forms.OpenFileDialog ofdReport;
         private System.Windows.Forms.SaveFileDialog sfdReport;
         private System.Windows.Forms.OpenFileDialog ofdMetadata;
+        private System.Windows.Forms.DataGridView grdReport;
+        private System.Windows.Forms.TextBox tbxSqlQueryTemp;
     }
 }
 

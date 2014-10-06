@@ -9,7 +9,7 @@
         <columns>
             <table>Operation</table>
             <column>Date</column>
-            <group>Week</group>
+            <group>Month</group>
         </columns>
         <aggregate>
             <name>Amount</name>
