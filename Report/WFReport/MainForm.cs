@@ -23,19 +23,22 @@ namespace WFReport
 
         public MainForm()
         {
-            InitializeComponent();
+            InitializeComponent();  
             MainResize(null, null);
         }
 
         private void MainResize(object sender, EventArgs e)
         {
             pnlLeft.Height = this.Height;
-            this.Text = this.Width.ToString() + "x" + this.Height.ToString();
+            //this.Text = this.Width.ToString() + "x" + this.Height.ToString();
             grdReport.Height = this.Height - 92;
             grdReport.Width = this.Width - 294;
 
             tbxSqlQueryDevMode.Height = grdReport.Height;
             tbxSqlQueryDevMode.Width = grdReport.Width;
+
+            btnFiltersAggregate.Visible = btnFiltersColumn.Visible = btnFiltersRows.Visible = false;
+            cboRows.Width = cboAggregate.Width = cboColumns.Width;
         }
 
         private void splitter1_Move(object sender, EventArgs e)
@@ -50,7 +53,7 @@ namespace WFReport
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MessageBox.Show("OLOLO");
+            //MessageBox.Show("OLOLO");
         }
 
         private void helpToolStripButton_Click(object sender, EventArgs e)
@@ -248,6 +251,7 @@ namespace WFReport
                         }
 
                         currentPathReport = ofdReport.FileName;
+                        pnlLeft.Enabled = true;
                         UpdateUIwithReportData();
                     }
                 }
@@ -303,6 +307,12 @@ namespace WFReport
             cboAggregate.SelectedIndex = cboAggregate.Items.IndexOf(currentReport.aTable.Name + ": " + currentReport.aColumn.Name);
             cboColumns  .SelectedIndex = cboColumns  .Items.IndexOf(currentReport.cTable.Name + ": " + currentReport.cColumn.Name);
             cboRows     .SelectedIndex = cboRows     .Items.IndexOf(currentReport.rTable.Name + ": " + currentReport.rColumn.Name);
+
+            lbxAdditionalFilters.Items.Clear();
+            foreach (var i in currentReport.restrictions)
+            {
+                lbxAdditionalFilters.Items.Add(i.ToString());
+            }
 
             RefreshData();
         }
@@ -440,6 +450,18 @@ namespace WFReport
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
+            if (currentDB == null)
+            {
+                MessageBox.Show("No database loaded!\nPlease load it by loading metadata (Ctrl+M) or by loading report (Ctrl+O)", "Database is not loaded", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (currentReport == null)
+            {
+                MessageBox.Show("No report is being changed!\nPlease load it (Ctrl+O), or create the new one (Ctrl+N)", "The report is not loaded", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             try
             {
                 string query = BuildSQLQuery();
@@ -493,6 +515,160 @@ namespace WFReport
                 tbxSqlQueryDevMode.Visible = true;
                 mimOptionsDev.Text = "Disable raw &sql mode";
                 lblModeInfo.Text = "Raw Sql mode enabled. Press Ctrl+D to disable it";
+            }
+        }
+
+        string filterstate = "";
+
+        IEnumerable<String> GetAllEntriesForTableColumn(string table, string column)
+        {
+            string databaseName = currentDB.Path;
+            using (SQLiteConnection connection = new SQLiteConnection(string.Format("Data Source={0};", databaseName)))
+            {
+                connection.Open();
+
+                string sqlstr = "SELECT " + table + "." + column + " FROM " + table + " GROUP BY " + table + "." + column + ";";
+
+                using (SQLiteCommand command = new SQLiteCommand(sqlstr , connection))
+                {
+                    SQLiteDataReader reader = command.ExecuteReader();
+
+                    List<string> columns = new List<string>();
+                    List<string> rows = new List<string>();
+                    List<string> values = new List<string>();
+
+                    foreach (DbDataRecord record in reader)
+                    {
+                        yield return record[0].ToString();
+                    }
+                }
+            }
+        }
+
+        private void btnMainFiltersAdd_Click(object sender, EventArgs e)
+        {
+            filterstate = "add";
+
+            pnlLeft.Enabled = false;
+
+            pnlFilterTableColumnType.Left = btnMainFiltersAdd.Left + 50;
+            pnlFilterTableColumnType.Top = btnMainFiltersAdd.Top + 300;
+
+            pnlFilterTableColumnType.Visible = true;
+            if (rbnOptions.Checked)
+            {
+                pnlOptions.Visible = true;
+                pnlFromTo.Visible = false;
+                pnlOptions.Left = pnlFilterTableColumnType.Left + pnlFilterTableColumnType.Width;
+            }
+            else
+            {
+                pnlFromTo.Visible = true;
+                pnlOptions.Visible = false;
+                pnlFromTo.Left = pnlFilterTableColumnType.Left + pnlFilterTableColumnType.Width;
+            }
+
+            pnlFromTo.Top = pnlOptions.Top = pnlFilterTableColumnType.Top;
+
+            cboFilter.Items.Clear();
+
+            foreach (var i in cboColumns.Items)
+                cboFilter.Items.Add(i);
+        }
+
+        private void btnFilterCancel_Click(object sender, EventArgs e)
+        {
+            filterstate = "";
+
+            pnlFilterTableColumnType.Visible = pnlFromTo.Visible = pnlOptions.Visible = false;
+            pnlLeft.Enabled = true;
+        }
+
+        private void rbnOptions_CheckedChanged(object sender, EventArgs e)
+        {
+            if (filterstate != "")
+            {
+                if (rbnOptions.Checked)
+                {
+                    pnlOptions.Visible = true;
+                    pnlFromTo.Visible = false;
+                    pnlOptions.Left = pnlFilterTableColumnType.Left + pnlFilterTableColumnType.Width;
+                }
+                else
+                {
+                    pnlFromTo.Visible = true;
+                    pnlOptions.Visible = false;
+                    pnlFromTo.Left = pnlFilterTableColumnType.Left + pnlFilterTableColumnType.Width;
+                }
+
+                pnlFromTo.Top = pnlOptions.Top = pnlFilterTableColumnType.Top;
+            }
+        }
+
+        private void cboFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboFilter.SelectedIndex < 1)
+                return;
+
+            try
+            {
+                lbxOptions.Items.Clear();
+
+                string table  = cboFilter.Items[cboFilter.SelectedIndex].ToString().Split(new char[] { ':' })[0];
+                string column = cboFilter.Items[cboFilter.SelectedIndex].ToString().Split(new char[] { ':' })[1].Split(new char[] {' '})[1];
+
+                foreach (var i in GetAllEntriesForTableColumn(table, column))
+                {
+                    lbxOptions.Items.Add(i);
+                }
+            }
+            catch (Exception) { }
+        }
+
+        private void btnFilterDone_Click(object sender, EventArgs e)
+        {
+            if (rbnOptions.Checked)
+            {
+                WFReport.DataReport.OptionsRestriction rest = new DataReport.OptionsRestriction();
+
+                rest.table = currentDB.Tables[cboFilter.Items[cboFilter.SelectedIndex].ToString().Split(new char[] { ':' })[0]];
+                rest.column = rest.table.Columns[cboFilter.Items[cboFilter.SelectedIndex].ToString().Split(new char[] { ':' })[1].Split(new char[] { ' ' })[1]];
+
+                foreach (var i in lbxOptions.CheckedItems)
+                    rest.options.Add(i.ToString());
+
+                currentReport.restrictions.Add(rest);
+
+                UpdateUIwithReportData();
+
+                btnFilterCancel_Click(sender, e);
+            }
+
+            if (rbnFromTo.Checked)
+            {
+                WFReport.DataReport.FromToRestriction rest = new DataReport.FromToRestriction();
+
+                rest.table = currentDB.Tables[cboFilter.Items[cboFilter.SelectedIndex].ToString().Split(new char[] { ':' })[0]];
+                rest.column = rest.table.Columns[cboFilter.Items[cboFilter.SelectedIndex].ToString().Split(new char[] { ':' })[1].Split(new char[] { ' ' })[1]];
+
+                rest.fromValue = tbxFrom.Text;
+                rest.  toValue = tbxTo  .Text;
+
+                currentReport.restrictions.Add(rest);
+
+                UpdateUIwithReportData();
+
+                btnFilterCancel_Click(sender, e);
+            }
+
+
+        }
+
+        private void btnMainFiltersEdit_Click(object sender, EventArgs e)
+        {
+            if (lbxAdditionalFilters.SelectedIndex >= 0)
+            {
+ 
             }
         }
 

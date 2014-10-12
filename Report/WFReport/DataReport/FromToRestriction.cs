@@ -14,5 +14,10 @@ namespace WFReport.DataReport
 
         public string fromValue = null;
         public string toValue = null;
+
+        public override string ToString()
+        {
+            return table.Name + ":" + column.Name + " (" + fromValue + "..." + toValue + ")";
+        }
     }
 }

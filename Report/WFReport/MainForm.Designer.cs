@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.pnlLeft = new System.Windows.Forms.Panel();
-            this.btnReload = new System.Windows.Forms.Button();
+            this.btnSwap = new System.Windows.Forms.CheckBox();
             this.btnGenerate = new System.Windows.Forms.Button();
             this.splLeftPanel = new System.Windows.Forms.Splitter();
             this.gbxAdditional = new System.Windows.Forms.GroupBox();
@@ -76,6 +76,20 @@
             this.ofdMetadata = new System.Windows.Forms.OpenFileDialog();
             this.grdReport = new System.Windows.Forms.DataGridView();
             this.tbxSqlQueryDevMode = new System.Windows.Forms.TextBox();
+            this.pnlFilterTableColumnType = new System.Windows.Forms.Panel();
+            this.cboFilter = new System.Windows.Forms.ComboBox();
+            this.lblTo = new System.Windows.Forms.Label();
+            this.rbnFromTo = new System.Windows.Forms.RadioButton();
+            this.rbnOptions = new System.Windows.Forms.RadioButton();
+            this.pnlFromTo = new System.Windows.Forms.Panel();
+            this.pnlOptions = new System.Windows.Forms.Panel();
+            this.lbxOptions = new System.Windows.Forms.CheckedListBox();
+            this.lblFrom = new System.Windows.Forms.Label();
+            this.lblFilter = new System.Windows.Forms.Label();
+            this.tbxFrom = new System.Windows.Forms.TextBox();
+            this.tbxTo = new System.Windows.Forms.TextBox();
+            this.btnFilterDone = new System.Windows.Forms.Button();
+            this.btnFilterCancel = new System.Windows.Forms.Button();
             this.pnlLeft.SuspendLayout();
             this.gbxAdditional.SuspendLayout();
             this.gbxColRowAgg.SuspendLayout();
@@ -83,30 +97,36 @@
             this.menuMain.SuspendLayout();
             this.tbrMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdReport)).BeginInit();
+            this.pnlFilterTableColumnType.SuspendLayout();
+            this.pnlFromTo.SuspendLayout();
+            this.pnlOptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlLeft
             // 
             this.pnlLeft.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.pnlLeft.Controls.Add(this.btnReload);
+            this.pnlLeft.Controls.Add(this.btnSwap);
             this.pnlLeft.Controls.Add(this.btnGenerate);
             this.pnlLeft.Controls.Add(this.splLeftPanel);
             this.pnlLeft.Controls.Add(this.gbxAdditional);
             this.pnlLeft.Controls.Add(this.gbxColRowAgg);
             this.pnlLeft.Controls.Add(this.gbxAllFields);
+            this.pnlLeft.Enabled = false;
             this.pnlLeft.Location = new System.Drawing.Point(0, 52);
             this.pnlLeft.Name = "pnlLeft";
             this.pnlLeft.Size = new System.Drawing.Size(271, 509);
             this.pnlLeft.TabIndex = 0;
             // 
-            // btnReload
+            // btnSwap
             // 
-            this.btnReload.Location = new System.Drawing.Point(11, 478);
-            this.btnReload.Name = "btnReload";
-            this.btnReload.Size = new System.Drawing.Size(115, 23);
-            this.btnReload.TabIndex = 2;
-            this.btnReload.Text = "Reload data";
-            this.btnReload.UseVisualStyleBackColor = true;
+            this.btnSwap.Appearance = System.Windows.Forms.Appearance.Button;
+            this.btnSwap.AutoSize = true;
+            this.btnSwap.Location = new System.Drawing.Point(18, 478);
+            this.btnSwap.Name = "btnSwap";
+            this.btnSwap.Size = new System.Drawing.Size(113, 23);
+            this.btnSwap.TabIndex = 5;
+            this.btnSwap.Text = "Swap rows/columns";
+            this.btnSwap.UseVisualStyleBackColor = true;
             // 
             // btnGenerate
             // 
@@ -159,6 +179,7 @@
             this.btnMainFiltersEdit.TabIndex = 2;
             this.btnMainFiltersEdit.Text = "Edit...";
             this.btnMainFiltersEdit.UseVisualStyleBackColor = true;
+            this.btnMainFiltersEdit.Click += new System.EventHandler(this.btnMainFiltersEdit_Click);
             // 
             // btnMainFiltersAdd
             // 
@@ -168,6 +189,7 @@
             this.btnMainFiltersAdd.TabIndex = 2;
             this.btnMainFiltersAdd.Text = "Add...";
             this.btnMainFiltersAdd.UseVisualStyleBackColor = true;
+            this.btnMainFiltersAdd.Click += new System.EventHandler(this.btnMainFiltersAdd_Click);
             // 
             // lbxAdditionalFilters
             // 
@@ -255,7 +277,7 @@
             this.cboColumns.FormattingEnabled = true;
             this.cboColumns.Location = new System.Drawing.Point(10, 37);
             this.cboColumns.Name = "cboColumns";
-            this.cboColumns.Size = new System.Drawing.Size(169, 21);
+            this.cboColumns.Size = new System.Drawing.Size(234, 21);
             this.cboColumns.TabIndex = 1;
             // 
             // lblRows
@@ -509,11 +531,158 @@
             this.tbxSqlQueryDevMode.Text = "<Report SQL>";
             this.tbxSqlQueryDevMode.Visible = false;
             // 
+            // pnlFilterTableColumnType
+            // 
+            this.pnlFilterTableColumnType.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pnlFilterTableColumnType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlFilterTableColumnType.Controls.Add(this.btnFilterCancel);
+            this.pnlFilterTableColumnType.Controls.Add(this.btnFilterDone);
+            this.pnlFilterTableColumnType.Controls.Add(this.rbnOptions);
+            this.pnlFilterTableColumnType.Controls.Add(this.lblFilter);
+            this.pnlFilterTableColumnType.Controls.Add(this.rbnFromTo);
+            this.pnlFilterTableColumnType.Controls.Add(this.cboFilter);
+            this.pnlFilterTableColumnType.Location = new System.Drawing.Point(309, 112);
+            this.pnlFilterTableColumnType.Name = "pnlFilterTableColumnType";
+            this.pnlFilterTableColumnType.Size = new System.Drawing.Size(196, 132);
+            this.pnlFilterTableColumnType.TabIndex = 5;
+            this.pnlFilterTableColumnType.Visible = false;
+            // 
+            // cboFilter
+            // 
+            this.cboFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboFilter.FormattingEnabled = true;
+            this.cboFilter.Location = new System.Drawing.Point(12, 24);
+            this.cboFilter.Name = "cboFilter";
+            this.cboFilter.Size = new System.Drawing.Size(172, 21);
+            this.cboFilter.TabIndex = 0;
+            this.cboFilter.SelectedIndexChanged += new System.EventHandler(this.cboFilter_SelectedIndexChanged);
+            // 
+            // lblTo
+            // 
+            this.lblTo.AutoSize = true;
+            this.lblTo.Location = new System.Drawing.Point(3, 52);
+            this.lblTo.Name = "lblTo";
+            this.lblTo.Size = new System.Drawing.Size(23, 13);
+            this.lblTo.TabIndex = 0;
+            this.lblTo.Text = "To:";
+            // 
+            // rbnFromTo
+            // 
+            this.rbnFromTo.AutoSize = true;
+            this.rbnFromTo.Location = new System.Drawing.Point(12, 52);
+            this.rbnFromTo.Name = "rbnFromTo";
+            this.rbnFromTo.Size = new System.Drawing.Size(91, 17);
+            this.rbnFromTo.TabIndex = 1;
+            this.rbnFromTo.Text = "Filter by range";
+            this.rbnFromTo.UseVisualStyleBackColor = true;
+            this.rbnFromTo.CheckedChanged += new System.EventHandler(this.rbnOptions_CheckedChanged);
+            // 
+            // rbnOptions
+            // 
+            this.rbnOptions.AutoSize = true;
+            this.rbnOptions.Checked = true;
+            this.rbnOptions.Location = new System.Drawing.Point(12, 75);
+            this.rbnOptions.Name = "rbnOptions";
+            this.rbnOptions.Size = new System.Drawing.Size(98, 17);
+            this.rbnOptions.TabIndex = 1;
+            this.rbnOptions.TabStop = true;
+            this.rbnOptions.Text = "Filter by options";
+            this.rbnOptions.UseVisualStyleBackColor = true;
+            this.rbnOptions.CheckedChanged += new System.EventHandler(this.rbnOptions_CheckedChanged);
+            // 
+            // pnlFromTo
+            // 
+            this.pnlFromTo.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pnlFromTo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlFromTo.Controls.Add(this.tbxTo);
+            this.pnlFromTo.Controls.Add(this.tbxFrom);
+            this.pnlFromTo.Controls.Add(this.lblFrom);
+            this.pnlFromTo.Controls.Add(this.lblTo);
+            this.pnlFromTo.Location = new System.Drawing.Point(511, 112);
+            this.pnlFromTo.Name = "pnlFromTo";
+            this.pnlFromTo.Size = new System.Drawing.Size(200, 132);
+            this.pnlFromTo.TabIndex = 6;
+            this.pnlFromTo.Visible = false;
+            // 
+            // pnlOptions
+            // 
+            this.pnlOptions.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pnlOptions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlOptions.Controls.Add(this.lbxOptions);
+            this.pnlOptions.Location = new System.Drawing.Point(717, 112);
+            this.pnlOptions.Name = "pnlOptions";
+            this.pnlOptions.Size = new System.Drawing.Size(200, 132);
+            this.pnlOptions.TabIndex = 6;
+            this.pnlOptions.Visible = false;
+            // 
+            // lbxOptions
+            // 
+            this.lbxOptions.FormattingEnabled = true;
+            this.lbxOptions.Location = new System.Drawing.Point(3, 3);
+            this.lbxOptions.Name = "lbxOptions";
+            this.lbxOptions.Size = new System.Drawing.Size(194, 124);
+            this.lbxOptions.TabIndex = 0;
+            // 
+            // lblFrom
+            // 
+            this.lblFrom.AutoSize = true;
+            this.lblFrom.Location = new System.Drawing.Point(3, 8);
+            this.lblFrom.Name = "lblFrom";
+            this.lblFrom.Size = new System.Drawing.Size(33, 13);
+            this.lblFrom.TabIndex = 0;
+            this.lblFrom.Text = "From:";
+            // 
+            // lblFilter
+            // 
+            this.lblFilter.AutoSize = true;
+            this.lblFilter.Location = new System.Drawing.Point(9, 8);
+            this.lblFilter.Name = "lblFilter";
+            this.lblFilter.Size = new System.Drawing.Size(72, 13);
+            this.lblFilter.TabIndex = 0;
+            this.lblFilter.Text = "Filter the field:";
+            // 
+            // tbxFrom
+            // 
+            this.tbxFrom.Location = new System.Drawing.Point(6, 24);
+            this.tbxFrom.Name = "tbxFrom";
+            this.tbxFrom.Size = new System.Drawing.Size(191, 20);
+            this.tbxFrom.TabIndex = 1;
+            // 
+            // tbxTo
+            // 
+            this.tbxTo.Location = new System.Drawing.Point(6, 72);
+            this.tbxTo.Name = "tbxTo";
+            this.tbxTo.Size = new System.Drawing.Size(191, 20);
+            this.tbxTo.TabIndex = 1;
+            // 
+            // btnFilterDone
+            // 
+            this.btnFilterDone.Location = new System.Drawing.Point(12, 106);
+            this.btnFilterDone.Name = "btnFilterDone";
+            this.btnFilterDone.Size = new System.Drawing.Size(75, 23);
+            this.btnFilterDone.TabIndex = 2;
+            this.btnFilterDone.Text = "Done";
+            this.btnFilterDone.UseVisualStyleBackColor = true;
+            this.btnFilterDone.Click += new System.EventHandler(this.btnFilterDone_Click);
+            // 
+            // btnFilterCancel
+            // 
+            this.btnFilterCancel.Location = new System.Drawing.Point(109, 106);
+            this.btnFilterCancel.Name = "btnFilterCancel";
+            this.btnFilterCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnFilterCancel.TabIndex = 2;
+            this.btnFilterCancel.Text = "Cancel";
+            this.btnFilterCancel.UseVisualStyleBackColor = true;
+            this.btnFilterCancel.Click += new System.EventHandler(this.btnFilterCancel_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 561);
+            this.Controls.Add(this.pnlOptions);
+            this.Controls.Add(this.pnlFromTo);
+            this.Controls.Add(this.pnlFilterTableColumnType);
             this.Controls.Add(this.tbxSqlQueryDevMode);
             this.Controls.Add(this.grdReport);
             this.Controls.Add(this.tbrMain);
@@ -526,6 +695,7 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Resize += new System.EventHandler(this.MainResize);
             this.pnlLeft.ResumeLayout(false);
+            this.pnlLeft.PerformLayout();
             this.gbxAdditional.ResumeLayout(false);
             this.gbxColRowAgg.ResumeLayout(false);
             this.gbxColRowAgg.PerformLayout();
@@ -535,6 +705,11 @@
             this.tbrMain.ResumeLayout(false);
             this.tbrMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdReport)).EndInit();
+            this.pnlFilterTableColumnType.ResumeLayout(false);
+            this.pnlFilterTableColumnType.PerformLayout();
+            this.pnlFromTo.ResumeLayout(false);
+            this.pnlFromTo.PerformLayout();
+            this.pnlOptions.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -579,7 +754,6 @@
         private System.Windows.Forms.Button btnMainFiltersDelete;
         private System.Windows.Forms.Button btnMainFiltersEdit;
         private System.Windows.Forms.Button btnMainFiltersAdd;
-        private System.Windows.Forms.Button btnReload;
         private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.ToolStripMenuItem mimFileOpenMetadata;
         private System.Windows.Forms.OpenFileDialog ofdReport;
@@ -589,6 +763,21 @@
         private System.Windows.Forms.TextBox tbxSqlQueryDevMode;
         private System.Windows.Forms.ToolStripSeparator mspInfo;
         private System.Windows.Forms.ToolStripLabel lblModeInfo;
+        private System.Windows.Forms.CheckBox btnSwap;
+        private System.Windows.Forms.Panel pnlFilterTableColumnType;
+        private System.Windows.Forms.ComboBox cboFilter;
+        private System.Windows.Forms.Label lblTo;
+        private System.Windows.Forms.RadioButton rbnOptions;
+        private System.Windows.Forms.RadioButton rbnFromTo;
+        private System.Windows.Forms.Panel pnlFromTo;
+        private System.Windows.Forms.Panel pnlOptions;
+        private System.Windows.Forms.CheckedListBox lbxOptions;
+        private System.Windows.Forms.Label lblFilter;
+        private System.Windows.Forms.Label lblFrom;
+        private System.Windows.Forms.TextBox tbxTo;
+        private System.Windows.Forms.TextBox tbxFrom;
+        private System.Windows.Forms.Button btnFilterCancel;
+        private System.Windows.Forms.Button btnFilterDone;
     }
 }
 

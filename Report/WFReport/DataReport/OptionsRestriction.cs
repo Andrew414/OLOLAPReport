@@ -13,5 +13,10 @@ namespace WFReport.DataReport
         public Column column = null;
 
         public List<string> options = new List<string>();
+
+        public override string ToString()
+        {
+            return table.Name + ":" + column.Name + " (" + options.Count.ToString() + " option" + (options.Count != 1 ? "s" : "") + ")";
+        }
     }
 }
