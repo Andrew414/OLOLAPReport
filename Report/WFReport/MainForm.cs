@@ -774,6 +774,12 @@ namespace WFReport
                 return;
             }
 
+            if (cboFilter.SelectedIndex < 1)
+            {
+                MessageBox.Show("Please select some field in the dropdown list first", "Filed is not selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (rbnOptions.Checked)
             {
                 WFReport.DataReport.OptionsRestriction rest = new DataReport.OptionsRestriction();
