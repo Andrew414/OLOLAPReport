@@ -77,19 +77,19 @@
             this.grdReport = new System.Windows.Forms.DataGridView();
             this.tbxSqlQueryDevMode = new System.Windows.Forms.TextBox();
             this.pnlFilterTableColumnType = new System.Windows.Forms.Panel();
+            this.btnFilterCancel = new System.Windows.Forms.Button();
+            this.btnFilterDone = new System.Windows.Forms.Button();
+            this.rbnOptions = new System.Windows.Forms.RadioButton();
+            this.lblFilter = new System.Windows.Forms.Label();
+            this.rbnFromTo = new System.Windows.Forms.RadioButton();
             this.cboFilter = new System.Windows.Forms.ComboBox();
             this.lblTo = new System.Windows.Forms.Label();
-            this.rbnFromTo = new System.Windows.Forms.RadioButton();
-            this.rbnOptions = new System.Windows.Forms.RadioButton();
             this.pnlFromTo = new System.Windows.Forms.Panel();
+            this.tbxTo = new System.Windows.Forms.TextBox();
+            this.tbxFrom = new System.Windows.Forms.TextBox();
+            this.lblFrom = new System.Windows.Forms.Label();
             this.pnlOptions = new System.Windows.Forms.Panel();
             this.lbxOptions = new System.Windows.Forms.CheckedListBox();
-            this.lblFrom = new System.Windows.Forms.Label();
-            this.lblFilter = new System.Windows.Forms.Label();
-            this.tbxFrom = new System.Windows.Forms.TextBox();
-            this.tbxTo = new System.Windows.Forms.TextBox();
-            this.btnFilterDone = new System.Windows.Forms.Button();
-            this.btnFilterCancel = new System.Windows.Forms.Button();
             this.pnlLeft.SuspendLayout();
             this.gbxAdditional.SuspendLayout();
             this.gbxColRowAgg.SuspendLayout();
@@ -351,6 +351,7 @@
             this.mimFileNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.mimFileNew.Size = new System.Drawing.Size(201, 22);
             this.mimFileNew.Text = "&New";
+            this.mimFileNew.Click += new System.EventHandler(this.mimFileNew_Click);
             // 
             // mimFileOpenReport
             // 
@@ -384,6 +385,7 @@
             this.mimFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.mimFileSave.Size = new System.Drawing.Size(201, 22);
             this.mimFileSave.Text = "&Save";
+            this.mimFileSave.Click += new System.EventHandler(this.mimFileSave_Click);
             // 
             // mimFileSaveAs
             // 
@@ -392,6 +394,7 @@
             | System.Windows.Forms.Keys.S)));
             this.mimFileSaveAs.Size = new System.Drawing.Size(201, 22);
             this.mimFileSaveAs.Text = "Save &As";
+            this.mimFileSaveAs.Click += new System.EventHandler(this.mimFileSaveAs_Click);
             // 
             // mspSaveExit
             // 
@@ -453,6 +456,7 @@
             this.tbxNew.Name = "tbxNew";
             this.tbxNew.Size = new System.Drawing.Size(23, 22);
             this.tbxNew.Text = "&New";
+            this.tbxNew.Click += new System.EventHandler(this.tbxNew_Click);
             // 
             // tbxOpenReport
             // 
@@ -472,6 +476,7 @@
             this.tbxSave.Name = "tbxSave";
             this.tbxSave.Size = new System.Drawing.Size(23, 22);
             this.tbxSave.Text = "&Save";
+            this.tbxSave.Click += new System.EventHandler(this.tbxSave_Click);
             // 
             // mspToolbar
             // 
@@ -501,11 +506,15 @@
             // 
             // ofdReport
             // 
-            this.ofdReport.FileName = "openFileDialog1";
+            this.ofdReport.Filter = "\"xml files (*.xml)|*.xml|All files (*.*)|*.*\" ";
+            // 
+            // sfdReport
+            // 
+            this.sfdReport.Filter = "\"xml files (*.xml)|*.xml|All files (*.*)|*.*\" ";
             // 
             // ofdMetadata
             // 
-            this.ofdMetadata.FileName = "openFileDialog1";
+            this.ofdMetadata.Filter = "\"xml files (*.xml)|*.xml|All files (*.*)|*.*\" ";
             // 
             // grdReport
             // 
@@ -547,6 +556,59 @@
             this.pnlFilterTableColumnType.TabIndex = 5;
             this.pnlFilterTableColumnType.Visible = false;
             // 
+            // btnFilterCancel
+            // 
+            this.btnFilterCancel.Location = new System.Drawing.Point(109, 106);
+            this.btnFilterCancel.Name = "btnFilterCancel";
+            this.btnFilterCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnFilterCancel.TabIndex = 2;
+            this.btnFilterCancel.Text = "Cancel";
+            this.btnFilterCancel.UseVisualStyleBackColor = true;
+            this.btnFilterCancel.Click += new System.EventHandler(this.btnFilterCancel_Click);
+            // 
+            // btnFilterDone
+            // 
+            this.btnFilterDone.Location = new System.Drawing.Point(12, 106);
+            this.btnFilterDone.Name = "btnFilterDone";
+            this.btnFilterDone.Size = new System.Drawing.Size(75, 23);
+            this.btnFilterDone.TabIndex = 2;
+            this.btnFilterDone.Text = "Done";
+            this.btnFilterDone.UseVisualStyleBackColor = true;
+            this.btnFilterDone.Click += new System.EventHandler(this.btnFilterDone_Click);
+            // 
+            // rbnOptions
+            // 
+            this.rbnOptions.AutoSize = true;
+            this.rbnOptions.Checked = true;
+            this.rbnOptions.Location = new System.Drawing.Point(12, 75);
+            this.rbnOptions.Name = "rbnOptions";
+            this.rbnOptions.Size = new System.Drawing.Size(98, 17);
+            this.rbnOptions.TabIndex = 1;
+            this.rbnOptions.TabStop = true;
+            this.rbnOptions.Text = "Filter by options";
+            this.rbnOptions.UseVisualStyleBackColor = true;
+            this.rbnOptions.CheckedChanged += new System.EventHandler(this.rbnOptions_CheckedChanged);
+            // 
+            // lblFilter
+            // 
+            this.lblFilter.AutoSize = true;
+            this.lblFilter.Location = new System.Drawing.Point(9, 8);
+            this.lblFilter.Name = "lblFilter";
+            this.lblFilter.Size = new System.Drawing.Size(72, 13);
+            this.lblFilter.TabIndex = 0;
+            this.lblFilter.Text = "Filter the field:";
+            // 
+            // rbnFromTo
+            // 
+            this.rbnFromTo.AutoSize = true;
+            this.rbnFromTo.Location = new System.Drawing.Point(12, 52);
+            this.rbnFromTo.Name = "rbnFromTo";
+            this.rbnFromTo.Size = new System.Drawing.Size(91, 17);
+            this.rbnFromTo.TabIndex = 1;
+            this.rbnFromTo.Text = "Filter by range";
+            this.rbnFromTo.UseVisualStyleBackColor = true;
+            this.rbnFromTo.CheckedChanged += new System.EventHandler(this.rbnOptions_CheckedChanged);
+            // 
             // cboFilter
             // 
             this.cboFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -566,30 +628,6 @@
             this.lblTo.TabIndex = 0;
             this.lblTo.Text = "To:";
             // 
-            // rbnFromTo
-            // 
-            this.rbnFromTo.AutoSize = true;
-            this.rbnFromTo.Location = new System.Drawing.Point(12, 52);
-            this.rbnFromTo.Name = "rbnFromTo";
-            this.rbnFromTo.Size = new System.Drawing.Size(91, 17);
-            this.rbnFromTo.TabIndex = 1;
-            this.rbnFromTo.Text = "Filter by range";
-            this.rbnFromTo.UseVisualStyleBackColor = true;
-            this.rbnFromTo.CheckedChanged += new System.EventHandler(this.rbnOptions_CheckedChanged);
-            // 
-            // rbnOptions
-            // 
-            this.rbnOptions.AutoSize = true;
-            this.rbnOptions.Checked = true;
-            this.rbnOptions.Location = new System.Drawing.Point(12, 75);
-            this.rbnOptions.Name = "rbnOptions";
-            this.rbnOptions.Size = new System.Drawing.Size(98, 17);
-            this.rbnOptions.TabIndex = 1;
-            this.rbnOptions.TabStop = true;
-            this.rbnOptions.Text = "Filter by options";
-            this.rbnOptions.UseVisualStyleBackColor = true;
-            this.rbnOptions.CheckedChanged += new System.EventHandler(this.rbnOptions_CheckedChanged);
-            // 
             // pnlFromTo
             // 
             this.pnlFromTo.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -603,6 +641,29 @@
             this.pnlFromTo.Size = new System.Drawing.Size(200, 132);
             this.pnlFromTo.TabIndex = 6;
             this.pnlFromTo.Visible = false;
+            // 
+            // tbxTo
+            // 
+            this.tbxTo.Location = new System.Drawing.Point(6, 72);
+            this.tbxTo.Name = "tbxTo";
+            this.tbxTo.Size = new System.Drawing.Size(191, 20);
+            this.tbxTo.TabIndex = 1;
+            // 
+            // tbxFrom
+            // 
+            this.tbxFrom.Location = new System.Drawing.Point(6, 24);
+            this.tbxFrom.Name = "tbxFrom";
+            this.tbxFrom.Size = new System.Drawing.Size(191, 20);
+            this.tbxFrom.TabIndex = 1;
+            // 
+            // lblFrom
+            // 
+            this.lblFrom.AutoSize = true;
+            this.lblFrom.Location = new System.Drawing.Point(3, 8);
+            this.lblFrom.Name = "lblFrom";
+            this.lblFrom.Size = new System.Drawing.Size(33, 13);
+            this.lblFrom.TabIndex = 0;
+            this.lblFrom.Text = "From:";
             // 
             // pnlOptions
             // 
@@ -622,58 +683,6 @@
             this.lbxOptions.Name = "lbxOptions";
             this.lbxOptions.Size = new System.Drawing.Size(194, 124);
             this.lbxOptions.TabIndex = 0;
-            // 
-            // lblFrom
-            // 
-            this.lblFrom.AutoSize = true;
-            this.lblFrom.Location = new System.Drawing.Point(3, 8);
-            this.lblFrom.Name = "lblFrom";
-            this.lblFrom.Size = new System.Drawing.Size(33, 13);
-            this.lblFrom.TabIndex = 0;
-            this.lblFrom.Text = "From:";
-            // 
-            // lblFilter
-            // 
-            this.lblFilter.AutoSize = true;
-            this.lblFilter.Location = new System.Drawing.Point(9, 8);
-            this.lblFilter.Name = "lblFilter";
-            this.lblFilter.Size = new System.Drawing.Size(72, 13);
-            this.lblFilter.TabIndex = 0;
-            this.lblFilter.Text = "Filter the field:";
-            // 
-            // tbxFrom
-            // 
-            this.tbxFrom.Location = new System.Drawing.Point(6, 24);
-            this.tbxFrom.Name = "tbxFrom";
-            this.tbxFrom.Size = new System.Drawing.Size(191, 20);
-            this.tbxFrom.TabIndex = 1;
-            // 
-            // tbxTo
-            // 
-            this.tbxTo.Location = new System.Drawing.Point(6, 72);
-            this.tbxTo.Name = "tbxTo";
-            this.tbxTo.Size = new System.Drawing.Size(191, 20);
-            this.tbxTo.TabIndex = 1;
-            // 
-            // btnFilterDone
-            // 
-            this.btnFilterDone.Location = new System.Drawing.Point(12, 106);
-            this.btnFilterDone.Name = "btnFilterDone";
-            this.btnFilterDone.Size = new System.Drawing.Size(75, 23);
-            this.btnFilterDone.TabIndex = 2;
-            this.btnFilterDone.Text = "Done";
-            this.btnFilterDone.UseVisualStyleBackColor = true;
-            this.btnFilterDone.Click += new System.EventHandler(this.btnFilterDone_Click);
-            // 
-            // btnFilterCancel
-            // 
-            this.btnFilterCancel.Location = new System.Drawing.Point(109, 106);
-            this.btnFilterCancel.Name = "btnFilterCancel";
-            this.btnFilterCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnFilterCancel.TabIndex = 2;
-            this.btnFilterCancel.Text = "Cancel";
-            this.btnFilterCancel.UseVisualStyleBackColor = true;
-            this.btnFilterCancel.Click += new System.EventHandler(this.btnFilterCancel_Click);
             // 
             // MainForm
             // 

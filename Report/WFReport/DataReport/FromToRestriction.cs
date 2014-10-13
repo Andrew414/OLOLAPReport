@@ -19,5 +19,24 @@ namespace WFReport.DataReport
         {
             return table.Name + ":" + column.Name + " (" + fromValue + "..." + toValue + ")";
         }
+
+        private const string XML_TEMPLATE = "        <fromto>" + "\n" +
+                                            "            <table>%TABLE%</table>" + "\n" +
+                                            "            <column>%COLUMN%</column>" + "\n" +
+                                            "            <from>%FROM%</from>" + "\n" +
+                                            "            <to>%TO%</to>" + "\n" +
+                                            "        </fromto>";
+
+        public string ToXML()
+        {
+            string xml = XML_TEMPLATE;
+
+            xml = xml.Replace("%TABLE%", this.table.Name);
+            xml = xml.Replace("%COLUMN%", this.column.Name);
+            xml = xml.Replace("%FROM%", this.fromValue);
+            xml = xml.Replace("%TO%", this.toValue);
+
+            return xml;
+        }
     }
 }

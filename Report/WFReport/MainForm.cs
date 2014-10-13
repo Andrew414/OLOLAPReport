@@ -661,15 +661,70 @@ namespace WFReport
                 btnFilterCancel_Click(sender, e);
             }
 
-
         }
 
         private void btnMainFiltersEdit_Click(object sender, EventArgs e)
         {
             if (lbxAdditionalFilters.SelectedIndex >= 0)
             {
- 
+                
             }
+        }
+
+        private void mimFileNew_Click(object sender, EventArgs e)
+        {
+            currentReport = new DataReport.Report();
+            currentPathReport = null;
+
+            pnlLeft.Enabled = true;
+        }
+
+        private void tbxNew_Click(object sender, EventArgs e)
+        {
+            mimFileNew_Click(sender, e);
+        }
+
+        private void SaveReportToFile(WFReport.DataReport.Report report, string filename)
+        {
+            try
+            {
+                string data = currentReport.ToXML(currentDB, currentPathMetadata);
+
+                StreamWriter file = new StreamWriter(filename);
+                file.WriteLine(data);
+                file.Close();
+
+                currentPathReport = filename;
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("Error while saving the file \"" + filename + "\": " + e.Message, "File cannot be saved", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void mimFileSaveAs_Click(object sender, EventArgs e)
+        {
+            if (sfdReport.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                SaveReportToFile(currentReport, sfdReport.FileName);
+            }
+        }
+
+        private void mimFileSave_Click(object sender, EventArgs e)
+        {
+            if (currentPathReport != null)
+            {
+                SaveReportToFile(currentReport, currentPathReport);
+            }
+            else
+            {
+                mimFileSave_Click(sender, e);
+            }
+        }
+
+        private void tbxSave_Click(object sender, EventArgs e)
+        {
+            mimFileSave_Click(sender, e);
         }
 
     }

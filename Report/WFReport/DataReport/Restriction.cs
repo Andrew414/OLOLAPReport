@@ -8,5 +8,6 @@ namespace WFReport.DataReport
 {
     public interface Restriction
     {
+        string ToXML();
     }
 }

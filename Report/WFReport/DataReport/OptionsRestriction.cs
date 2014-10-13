@@ -18,5 +18,27 @@ namespace WFReport.DataReport
         {
             return table.Name + ":" + column.Name + " (" + options.Count.ToString() + " option" + (options.Count != 1 ? "s" : "") + ")";
         }
+
+        private const string XML_TEMPLATE = "        <options>" + "\n" +
+                                            "            <table>%TABLE%</table>" + "\n" +
+                                            "            <column>%COLUMN%</column>" + "\n" +
+                                            "            %OPTIONS%" + "\n" +
+                                            "        </options>";
+
+        public string ToXML()
+        {
+            string xml = XML_TEMPLATE;
+
+            xml = xml.Replace("%TABLE%", table.Name);
+            xml = xml.Replace("%COLUMN%", column.Name);
+
+            string opts = "";
+            foreach (var i in options)
+                opts += "\n" + "            " + "<option>" + i + "</option>";
+
+            xml = xml.Replace("%OPTIONS%", opts);
+
+            return xml;
+        }
     }
 }
