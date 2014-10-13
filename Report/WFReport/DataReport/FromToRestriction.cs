@@ -17,7 +17,7 @@ namespace WFReport.DataReport
 
         public override string ToString()
         {
-            return table.Name + ":" + column.Name + " (" + fromValue + "..." + toValue + ")";
+            return table.Name + ": " + column.Name + " (" + fromValue + "..." + toValue + ")";
         }
 
         private const string XML_TEMPLATE = "        <fromto>" + "\n" +

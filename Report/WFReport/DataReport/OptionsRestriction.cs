@@ -16,7 +16,7 @@ namespace WFReport.DataReport
 
         public override string ToString()
         {
-            return table.Name + ":" + column.Name + " (" + options.Count.ToString() + " option" + (options.Count != 1 ? "s" : "") + ")";
+            return table.Name + ": " + column.Name + " (" + options.Count.ToString() + " option" + (options.Count != 1 ? "s" : "") + ")";
         }
 
         private const string XML_TEMPLATE = "        <options>" + "\n" +

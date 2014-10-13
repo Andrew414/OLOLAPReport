@@ -127,6 +127,7 @@
             this.btnSwap.TabIndex = 5;
             this.btnSwap.Text = "Swap rows/columns";
             this.btnSwap.UseVisualStyleBackColor = true;
+            this.btnSwap.CheckedChanged += new System.EventHandler(this.btnSwap_CheckedChanged);
             // 
             // btnGenerate
             // 
@@ -232,6 +233,7 @@
             this.cboRowsGroup.Name = "cboRowsGroup";
             this.cboRowsGroup.Size = new System.Drawing.Size(60, 21);
             this.cboRowsGroup.TabIndex = 7;
+            this.cboRowsGroup.SelectedIndexChanged += new System.EventHandler(this.cboRowsGroup_SelectedIndexChanged);
             // 
             // cboColumnGroup
             // 
@@ -246,6 +248,7 @@
             this.cboColumnGroup.Name = "cboColumnGroup";
             this.cboColumnGroup.Size = new System.Drawing.Size(60, 21);
             this.cboColumnGroup.TabIndex = 7;
+            this.cboColumnGroup.SelectedIndexChanged += new System.EventHandler(this.cboColumnGroup_SelectedIndexChanged);
             // 
             // cboAggregate
             // 
@@ -255,6 +258,7 @@
             this.cboAggregate.Name = "cboAggregate";
             this.cboAggregate.Size = new System.Drawing.Size(169, 21);
             this.cboAggregate.TabIndex = 1;
+            this.cboAggregate.SelectedIndexChanged += new System.EventHandler(this.cboAggregate_SelectedIndexChanged);
             // 
             // cboRows
             // 
@@ -264,6 +268,7 @@
             this.cboRows.Name = "cboRows";
             this.cboRows.Size = new System.Drawing.Size(169, 21);
             this.cboRows.TabIndex = 1;
+            this.cboRows.SelectedIndexChanged += new System.EventHandler(this.cboRows_SelectedIndexChanged);
             // 
             // lblAggregate
             // 

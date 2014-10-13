@@ -24,7 +24,7 @@ namespace WFReport.DataReport
 @"SELECT 
 	<COLUMNS>,
 	<ROWS>,
-	count(<AGGREGATE>)
+	sum(<AGGREGATE>)
 FROM
 	Operation
 	INNER JOIN Buyer ON Buyer.Id = Operation.BuyerId

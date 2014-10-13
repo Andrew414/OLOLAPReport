@@ -66,8 +66,74 @@ namespace WFReport
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             List<int> newSelected = new List<int>();
 
+            foreach (var i in lbxImportantFields.CheckedIndices)
+            {
+                newSelected.Add((int)i);
+            }
+
+            if (newSelected.Count >= lastImportant.Count)
+            {
+                lastImportant = newSelected;
+
+                cboColumns.Items.Clear();
+                cboRows.Items.Clear();
+
+                cboColumns.Items.Add(" ");
+                cboRows.Items.Add(" ");
+
+                foreach(var i in lastImportant)
+                {
+                    cboColumns.Items.Add(lbxImportantFields.Items[i]);
+                    cboRows.Items.Add(lbxImportantFields.Items[i]);
+                }
+
+                UpdateUIwithReportData();
+
+                return;
+            }
+
+            foreach (var i in lbxImportantFields.Items)
+            {
+                if (!lbxImportantFields.CheckedItems.Contains(i))
+                {
+                    if (cboAggregate.SelectedItem.ToString().Contains(i.ToString()))
+                    {
+                        cboAggregate.SelectedIndex = 0;
+                    }
+
+                    cboAggregate.Items.Remove(i);
+
+                    if (cboColumns.SelectedItem.ToString().Contains(i.ToString()))
+                    {
+                        cboColumns.SelectedIndex = 0;
+                    }
+
+                    cboColumns.Items.Remove(i);
+
+                    if (cboRows.SelectedItem.ToString().Contains(i.ToString()))
+                    {
+                        cboRows.SelectedIndex = 0;
+                    }
+
+                    cboRows.Items.Remove(i);
+
+                    List<WFReport.DataReport.Restriction> toBeDeleted = new List<DataReport.Restriction>();
+                    foreach (var j in currentReport.restrictions)
+                    {
+                        if (j.ToString().Contains(i.ToString()))
+                            toBeDeleted.Add(j);
+                    }
+                    foreach (var j in toBeDeleted)
+                    {
+                        currentReport.restrictions.Remove(j);
+                    }
+                }
+            }
+
+            UpdateUIwithReportData();
         }
 
         private void helpToolStripButton_Click(object sender, EventArgs e)
@@ -84,6 +150,10 @@ namespace WFReport
                     LoadMetadataFromFile(ofdMetadata.FileName);
 
                     UpdateUIwithMetadata();
+
+                    for (int i = 0; i < lbxImportantFields.Items.Count; i++)
+                        lbxImportantFields.SetItemChecked(i, true);
+
                     MessageBox.Show("The description of the database \"" + currentDB.Name + "\"" + " was loaded successfully!",
                     "Database metadata loaded", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -266,6 +336,11 @@ namespace WFReport
 
                         currentPathReport = ofdReport.FileName;
                         pnlLeft.Enabled = true;
+
+                        UpdateUIwithMetadata();
+                        for (int k = 0; k < lbxImportantFields.Items.Count; k++)
+                            lbxImportantFields.SetItemChecked(k, true);
+
                         UpdateUIwithReportData();
                     }
                 }
@@ -302,7 +377,7 @@ namespace WFReport
                 {
                     if (!j.Aggregate)
                     {
-                        lbxImportantFields.Items.Add(i.Name + ": " + j.Name, true);
+                        lbxImportantFields.Items.Add(i.Name + ": " + j.Name);
                         cboColumns.Items.Add(i.Name + ": " + j.Name);
                         cboRows.Items.Add(i.Name + ": " + j.Name);
                         
@@ -312,11 +387,12 @@ namespace WFReport
                     }
                 }
             }
+
         }
 
         private void UIProcessGroupBy(WFReport.Metadata.Column col, ComboBox combo, string group)
         {
-            if (col.Type == Metadata.ColumnType.DateColumn)
+            if (col != null && col.Type == Metadata.ColumnType.DateColumn)
             {
                 combo.Enabled = true;
 
@@ -347,14 +423,14 @@ namespace WFReport
 
         private void UpdateUIwithReportData()
         {
-            UpdateUIwithMetadata();
-
-            cboAggregate.SelectedIndex = cboAggregate.Items.IndexOf(currentReport.aTable.Name + ": " + currentReport.aColumn.Name);
-            cboColumns  .SelectedIndex = cboColumns  .Items.IndexOf(currentReport.cTable.Name + ": " + currentReport.cColumn.Name);
-            cboRows     .SelectedIndex = cboRows     .Items.IndexOf(currentReport.rTable.Name + ": " + currentReport.rColumn.Name);
+            //UpdateUIwithMetadata();
 
             UIProcessGroupBy(currentReport.cColumn, cboColumnGroup, currentReport.cGroup);
-            UIProcessGroupBy(currentReport.rColumn, cboRowsGroup  , currentReport.rGroup);
+            UIProcessGroupBy(currentReport.rColumn, cboRowsGroup, currentReport.rGroup);
+
+            cboAggregate.SelectedIndex = (currentReport.aColumn != null && currentReport.aTable != null) ? cboAggregate.Items.IndexOf(currentReport.aTable.Name + ": " + currentReport.aColumn.Name) : 0;
+            cboColumns  .SelectedIndex = (currentReport.cColumn != null && currentReport.cTable != null) ? cboColumns  .Items.IndexOf(currentReport.cTable.Name + ": " + currentReport.cColumn.Name) : 0;
+            cboRows     .SelectedIndex = (currentReport.rColumn != null && currentReport.rTable != null) ? cboRows     .Items.IndexOf(currentReport.rTable.Name + ": " + currentReport.rColumn.Name) : 0;
 
             lbxAdditionalFilters.Items.Clear();
             foreach (var i in currentReport.restrictions)
@@ -388,10 +464,14 @@ namespace WFReport
                         return "strftime(\"%Y\", " +
                             table.Name + "." + column.Name + ")";
                     case "Day":
+                    default:
                         return "strftime(\"%Y-%m-%d\", " +
                            table.Name + "." + column.Name + ")";
-                    default:
-                        return table.Name + "." + column.Name;
+
+                    // Sqlite plugin doesn't recognize the unformatted dates. 
+                    // So default action is changed to be the same as for "day" 
+                    //default:
+                    //    return table.Name + "." + column.Name;
                 }
             }
 
@@ -510,7 +590,15 @@ namespace WFReport
                 return;
             }
 
-            try
+            if (currentReport.aColumn == null || currentReport.aTable == null || 
+                currentReport.cColumn == null || currentReport.cTable == null || 
+                currentReport.rColumn == null || currentReport.rTable == null)
+            {
+                MessageBox.Show("At lease one of the important fields is not chosen (rows/columns/aggregate).\nPlease choose them and then try again", "Fields for report are not chosen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //try
             {
                 string query = BuildSQLQuery();
                 tbxSqlQueryDevMode.Text = query;
@@ -530,8 +618,8 @@ namespace WFReport
 
                         foreach (DbDataRecord record in reader)
                         {
-                            columns.Add(record[0].ToString());
-                            rows.Add(record[1].ToString());
+                            columns.Add(record[btnSwap.Checked ? 1 : 0].ToString());
+                            rows.Add(record[btnSwap.Checked ? 0 : 1].ToString());
                             values.Add(record[2].ToString());
                         }
 
@@ -539,12 +627,12 @@ namespace WFReport
                     }
 
                 }
-            }
+            }/*
             catch (Exception ex)
             {
                 MessageBox.Show("An error occured during fetching the data for the report:\n" + ex.Message,
                     "Cannot build the report graph", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            }*/
             
 
             //MessageBox.Show(sqlQuery);
@@ -934,7 +1022,111 @@ namespace WFReport
 
         private void cboColumns_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //string table = 
+            if (cboColumns.SelectedIndex == 0)
+            {
+                currentReport.cTable = null;
+                currentReport.cColumn = null;
+                currentReport.cGroup = "";
+
+                cboColumnGroup.Enabled = false;
+
+                return;
+            }
+
+            string stable = cboColumns.SelectedItem.ToString().Split(new char[] { ':' })[0];
+            string scolumn = cboColumns.SelectedItem.ToString().Split(new char[] { ':' })[1].Split(new char[] {' '})[1];
+
+            Metadata.Table table = currentDB.Tables[stable];
+            Metadata.Column column = table.Columns[scolumn];
+
+            if (column.Type == Metadata.ColumnType.DateColumn)
+            {
+                cboColumnGroup.Enabled = true;
+
+                if (cboColumnGroup.SelectedIndex < 0)
+                    cboColumnGroup.SelectedIndex = 0;
+
+                currentReport.cGroup = cboColumnGroup.SelectedItem.ToString();
+            }
+            else
+            {
+                cboColumnGroup.Enabled = false;
+            }
+
+            currentReport.cTable = table;
+            currentReport.cColumn = column;
+        }
+
+        private void cboRows_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboRows.SelectedIndex == 0)
+            {
+                currentReport.rTable = null;
+                currentReport.rColumn = null;
+                currentReport.rGroup = "";
+
+                cboRowsGroup.Enabled = false;
+
+                return;
+            }
+
+            string stable = cboRows.SelectedItem.ToString().Split(new char[] { ':' })[0];
+            string scolumn = cboRows.SelectedItem.ToString().Split(new char[] { ':' })[1].Split(new char[] { ' ' })[1];
+
+            Metadata.Table table = currentDB.Tables[stable];
+            Metadata.Column column = table.Columns[scolumn];
+
+            if (column.Type == Metadata.ColumnType.DateColumn)
+            {
+                cboRowsGroup.Enabled = true;
+
+                if (cboRowsGroup.SelectedIndex < 0)
+                    cboRowsGroup.SelectedIndex = 0;
+
+                currentReport.rGroup = cboRowsGroup.SelectedItem.ToString();
+            }
+            else
+            {
+                cboRowsGroup.Enabled = false;
+            }
+
+            currentReport.rTable = table;
+            currentReport.rColumn = column;
+        }
+
+        private void btnSwap_CheckedChanged(object sender, EventArgs e)
+        {
+            btnGenerate_Click(sender, e);
+        }
+
+        private void cboColumnGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            currentReport.cGroup = cboColumnGroup.SelectedItem.ToString();
+        }
+
+        private void cboRowsGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            currentReport.rGroup = cboRowsGroup.SelectedItem.ToString();
+        }
+
+        private void cboAggregate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboAggregate.SelectedIndex == 0)
+            {
+                currentReport.aTable = null;
+                currentReport.aColumn = null;
+
+                return;
+            }
+
+            string stable = cboAggregate.SelectedItem.ToString().Split(new char[] { ':' })[0];
+            string scolumn = cboAggregate.SelectedItem.ToString().Split(new char[] { ':' })[1].Split(new char[] { ' ' })[1];
+
+            Metadata.Table table = currentDB.Tables[stable];
+            Metadata.Column column = table.Columns[scolumn];
+
+            currentReport.aTable = table;
+            currentReport.aColumn = column;
         }
 
     }
