@@ -40,5 +40,15 @@ namespace WFReport.DataReport
 
             return xml;
         }
+
+        public Table GetTable()
+        {
+            return table;
+        }
+
+        public Column GetColumn()
+        {
+            return column;
+        }
     }
 }

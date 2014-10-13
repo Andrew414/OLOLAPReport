@@ -39,14 +39,14 @@
             this.btnMainFiltersAdd = new System.Windows.Forms.Button();
             this.lbxAdditionalFilters = new System.Windows.Forms.ListBox();
             this.gbxColRowAgg = new System.Windows.Forms.GroupBox();
-            this.btnFiltersAggregate = new System.Windows.Forms.Button();
-            this.btnFiltersRows = new System.Windows.Forms.Button();
-            this.btnFiltersColumn = new System.Windows.Forms.Button();
+            this.cboRowsGroup = new System.Windows.Forms.ComboBox();
+            this.cboColumnGroup = new System.Windows.Forms.ComboBox();
             this.cboAggregate = new System.Windows.Forms.ComboBox();
             this.cboRows = new System.Windows.Forms.ComboBox();
             this.lblAggregate = new System.Windows.Forms.Label();
             this.cboColumns = new System.Windows.Forms.ComboBox();
             this.lblRows = new System.Windows.Forms.Label();
+            this.lblGroupBy = new System.Windows.Forms.Label();
             this.lblColumns = new System.Windows.Forms.Label();
             this.gbxAllFields = new System.Windows.Forms.GroupBox();
             this.lbxImportantFields = new System.Windows.Forms.CheckedListBox();
@@ -170,6 +170,7 @@
             this.btnMainFiltersDelete.TabIndex = 2;
             this.btnMainFiltersDelete.Text = "Delete";
             this.btnMainFiltersDelete.UseVisualStyleBackColor = true;
+            this.btnMainFiltersDelete.Click += new System.EventHandler(this.btnMainFiltersDelete_Click);
             // 
             // btnMainFiltersEdit
             // 
@@ -198,17 +199,18 @@
             this.lbxAdditionalFilters.Name = "lbxAdditionalFilters";
             this.lbxAdditionalFilters.Size = new System.Drawing.Size(238, 69);
             this.lbxAdditionalFilters.TabIndex = 0;
+            this.lbxAdditionalFilters.DoubleClick += new System.EventHandler(this.lbxAdditionalFilters_DoubleClick);
             // 
             // gbxColRowAgg
             // 
-            this.gbxColRowAgg.Controls.Add(this.btnFiltersAggregate);
-            this.gbxColRowAgg.Controls.Add(this.btnFiltersRows);
-            this.gbxColRowAgg.Controls.Add(this.btnFiltersColumn);
+            this.gbxColRowAgg.Controls.Add(this.cboRowsGroup);
+            this.gbxColRowAgg.Controls.Add(this.cboColumnGroup);
             this.gbxColRowAgg.Controls.Add(this.cboAggregate);
             this.gbxColRowAgg.Controls.Add(this.cboRows);
             this.gbxColRowAgg.Controls.Add(this.lblAggregate);
             this.gbxColRowAgg.Controls.Add(this.cboColumns);
             this.gbxColRowAgg.Controls.Add(this.lblRows);
+            this.gbxColRowAgg.Controls.Add(this.lblGroupBy);
             this.gbxColRowAgg.Controls.Add(this.lblColumns);
             this.gbxColRowAgg.Location = new System.Drawing.Point(12, 202);
             this.gbxColRowAgg.Name = "gbxColRowAgg";
@@ -217,32 +219,33 @@
             this.gbxColRowAgg.TabStop = false;
             this.gbxColRowAgg.Text = "Columns, rows, aggregate";
             // 
-            // btnFiltersAggregate
+            // cboRowsGroup
             // 
-            this.btnFiltersAggregate.Location = new System.Drawing.Point(186, 118);
-            this.btnFiltersAggregate.Name = "btnFiltersAggregate";
-            this.btnFiltersAggregate.Size = new System.Drawing.Size(59, 23);
-            this.btnFiltersAggregate.TabIndex = 2;
-            this.btnFiltersAggregate.Text = "filters...";
-            this.btnFiltersAggregate.UseVisualStyleBackColor = true;
+            this.cboRowsGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboRowsGroup.FormattingEnabled = true;
+            this.cboRowsGroup.Items.AddRange(new object[] {
+            "None",
+            "Day",
+            "Month",
+            "Year"});
+            this.cboRowsGroup.Location = new System.Drawing.Point(186, 78);
+            this.cboRowsGroup.Name = "cboRowsGroup";
+            this.cboRowsGroup.Size = new System.Drawing.Size(60, 21);
+            this.cboRowsGroup.TabIndex = 7;
             // 
-            // btnFiltersRows
+            // cboColumnGroup
             // 
-            this.btnFiltersRows.Location = new System.Drawing.Point(186, 77);
-            this.btnFiltersRows.Name = "btnFiltersRows";
-            this.btnFiltersRows.Size = new System.Drawing.Size(59, 23);
-            this.btnFiltersRows.TabIndex = 2;
-            this.btnFiltersRows.Text = "filters...";
-            this.btnFiltersRows.UseVisualStyleBackColor = true;
-            // 
-            // btnFiltersColumn
-            // 
-            this.btnFiltersColumn.Location = new System.Drawing.Point(186, 36);
-            this.btnFiltersColumn.Name = "btnFiltersColumn";
-            this.btnFiltersColumn.Size = new System.Drawing.Size(59, 23);
-            this.btnFiltersColumn.TabIndex = 2;
-            this.btnFiltersColumn.Text = "filters...";
-            this.btnFiltersColumn.UseVisualStyleBackColor = true;
+            this.cboColumnGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboColumnGroup.FormattingEnabled = true;
+            this.cboColumnGroup.Items.AddRange(new object[] {
+            "None",
+            "Day",
+            "Month",
+            "Year"});
+            this.cboColumnGroup.Location = new System.Drawing.Point(186, 37);
+            this.cboColumnGroup.Name = "cboColumnGroup";
+            this.cboColumnGroup.Size = new System.Drawing.Size(60, 21);
+            this.cboColumnGroup.TabIndex = 7;
             // 
             // cboAggregate
             // 
@@ -277,8 +280,9 @@
             this.cboColumns.FormattingEnabled = true;
             this.cboColumns.Location = new System.Drawing.Point(10, 37);
             this.cboColumns.Name = "cboColumns";
-            this.cboColumns.Size = new System.Drawing.Size(234, 21);
+            this.cboColumns.Size = new System.Drawing.Size(169, 21);
             this.cboColumns.TabIndex = 1;
+            this.cboColumns.SelectedIndexChanged += new System.EventHandler(this.cboColumns_SelectedIndexChanged);
             // 
             // lblRows
             // 
@@ -288,6 +292,15 @@
             this.lblRows.Size = new System.Drawing.Size(34, 13);
             this.lblRows.TabIndex = 0;
             this.lblRows.Text = "Rows";
+            // 
+            // lblGroupBy
+            // 
+            this.lblGroupBy.AutoSize = true;
+            this.lblGroupBy.Location = new System.Drawing.Point(187, 20);
+            this.lblGroupBy.Name = "lblGroupBy";
+            this.lblGroupBy.Size = new System.Drawing.Size(53, 13);
+            this.lblGroupBy.TabIndex = 0;
+            this.lblGroupBy.Text = "Group by:";
             // 
             // lblColumns
             // 
@@ -407,6 +420,7 @@
             this.mimFileExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
             this.mimFileExit.Size = new System.Drawing.Size(201, 22);
             this.mimFileExit.Text = "E&xit";
+            this.mimFileExit.Click += new System.EventHandler(this.mimFileExit_Click);
             // 
             // mimOptions
             // 
@@ -431,6 +445,7 @@
             this.mimOptionsAbout.ShortcutKeys = System.Windows.Forms.Keys.F1;
             this.mimOptionsAbout.Size = new System.Drawing.Size(225, 22);
             this.mimOptionsAbout.Text = "&About";
+            this.mimOptionsAbout.Click += new System.EventHandler(this.mimOptionsAbout_Click);
             // 
             // tbrMain
             // 
@@ -506,15 +521,15 @@
             // 
             // ofdReport
             // 
-            this.ofdReport.Filter = "\"xml files (*.xml)|*.xml|All files (*.*)|*.*\" ";
+            this.ofdReport.Filter = "xml files (*.xml)|*.xml|All files (*.*)|*.*";
             // 
             // sfdReport
             // 
-            this.sfdReport.Filter = "\"xml files (*.xml)|*.xml|All files (*.*)|*.*\" ";
+            this.sfdReport.Filter = "xml files (*.xml)|*.xml|All files (*.*)|*.*";
             // 
             // ofdMetadata
             // 
-            this.ofdMetadata.Filter = "\"xml files (*.xml)|*.xml|All files (*.*)|*.*\" ";
+            this.ofdMetadata.Filter = "xml files (*.xml)|*.xml|All files (*.*)|*.*";
             // 
             // grdReport
             // 
@@ -522,8 +537,10 @@
             this.grdReport.AllowUserToDeleteRows = false;
             this.grdReport.AllowUserToOrderColumns = true;
             this.grdReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdReport.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.grdReport.Location = new System.Drawing.Point(277, 52);
             this.grdReport.Name = "grdReport";
+            this.grdReport.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.grdReport.RowHeadersVisible = false;
             this.grdReport.Size = new System.Drawing.Size(731, 509);
             this.grdReport.TabIndex = 3;
@@ -751,9 +768,6 @@
         private System.Windows.Forms.GroupBox gbxColRowAgg;
         private System.Windows.Forms.Label lblColumns;
         private System.Windows.Forms.ComboBox cboColumns;
-        private System.Windows.Forms.Button btnFiltersColumn;
-        private System.Windows.Forms.Button btnFiltersAggregate;
-        private System.Windows.Forms.Button btnFiltersRows;
         private System.Windows.Forms.ComboBox cboAggregate;
         private System.Windows.Forms.ComboBox cboRows;
         private System.Windows.Forms.Label lblAggregate;
@@ -787,6 +801,9 @@
         private System.Windows.Forms.TextBox tbxFrom;
         private System.Windows.Forms.Button btnFilterCancel;
         private System.Windows.Forms.Button btnFilterDone;
+        private System.Windows.Forms.ComboBox cboColumnGroup;
+        private System.Windows.Forms.ComboBox cboRowsGroup;
+        private System.Windows.Forms.Label lblGroupBy;
     }
 }
 

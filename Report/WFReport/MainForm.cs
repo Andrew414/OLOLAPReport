@@ -21,6 +21,9 @@ namespace WFReport
         public string currentPathMetadata = null;
         public string currentPathReport = null;
 
+        string filterstate = "";
+        List<int> lastImportant = new List<int>();
+
         public MainForm()
         {
             InitializeComponent();  
@@ -37,8 +40,18 @@ namespace WFReport
             tbxSqlQueryDevMode.Height = grdReport.Height;
             tbxSqlQueryDevMode.Width = grdReport.Width;
 
-            btnFiltersAggregate.Visible = btnFiltersColumn.Visible = btnFiltersRows.Visible = false;
+            //btnFiltersAggregate.Visible = btnFiltersColumn.Visible = btnFiltersRows.Visible = false;
             cboRows.Width = cboAggregate.Width = cboColumns.Width;
+
+            btnSwap.Top = this.Height - 122;
+            btnGenerate.Top = btnSwap.Top;
+
+            gbxAdditional.Height = this.Height - 483;
+
+            btnMainFiltersAdd.Top = gbxAdditional.Height - 27;
+            btnMainFiltersDelete.Top = btnMainFiltersEdit.Top = btnMainFiltersAdd.Top;
+
+            lbxAdditionalFilters.Height = gbxAdditional.Height - 48;
         }
 
         private void splitter1_Move(object sender, EventArgs e)
@@ -53,12 +66,13 @@ namespace WFReport
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //MessageBox.Show("OLOLO");
+            List<int> newSelected = new List<int>();
+
         }
 
         private void helpToolStripButton_Click(object sender, EventArgs e)
         {
-            
+            mimOptionsAbout_Click(sender, e);
         }
 
         private void openMetadataToolStripMenuItem_Click(object sender, EventArgs e)
@@ -300,6 +314,37 @@ namespace WFReport
             }
         }
 
+        private void UIProcessGroupBy(WFReport.Metadata.Column col, ComboBox combo, string group)
+        {
+            if (col.Type == Metadata.ColumnType.DateColumn)
+            {
+                combo.Enabled = true;
+
+                // day = 1; month = 2; year = 3; another = 0
+
+                switch (group)
+                {
+                    case "Month":
+                        combo.SelectedItem = combo.Items[2];
+                        break;
+                    case "Year":
+                        combo.SelectedItem = combo.Items[3];
+                        break;
+                    case "Day":
+                        combo.SelectedItem = combo.Items[1];
+                        break;
+                    default:
+                        combo.SelectedItem = combo.Items[0];
+                        break;
+                }
+            }
+            else
+            {
+                combo.Enabled = false;
+                combo.SelectedItem = combo.Items[0];
+            }
+        }
+
         private void UpdateUIwithReportData()
         {
             UpdateUIwithMetadata();
@@ -307,6 +352,9 @@ namespace WFReport
             cboAggregate.SelectedIndex = cboAggregate.Items.IndexOf(currentReport.aTable.Name + ": " + currentReport.aColumn.Name);
             cboColumns  .SelectedIndex = cboColumns  .Items.IndexOf(currentReport.cTable.Name + ": " + currentReport.cColumn.Name);
             cboRows     .SelectedIndex = cboRows     .Items.IndexOf(currentReport.rTable.Name + ": " + currentReport.rColumn.Name);
+
+            UIProcessGroupBy(currentReport.cColumn, cboColumnGroup, currentReport.cGroup);
+            UIProcessGroupBy(currentReport.rColumn, cboRowsGroup  , currentReport.rGroup);
 
             lbxAdditionalFilters.Items.Clear();
             foreach (var i in currentReport.restrictions)
@@ -518,8 +566,6 @@ namespace WFReport
             }
         }
 
-        string filterstate = "";
-
         IEnumerable<String> GetAllEntriesForTableColumn(string table, string column)
         {
             string databaseName = currentDB.Path;
@@ -621,12 +667,25 @@ namespace WFReport
                 {
                     lbxOptions.Items.Add(i);
                 }
+
+                for(var i = 0; i < lbxOptions.Items.Count; i++)
+                {
+                    lbxOptions.SetItemChecked(i, true);
+                }
+
+                tbxFrom.Text = "";
+                tbxTo.Text = "";
             }
             catch (Exception) { }
         }
 
         private void btnFilterDone_Click(object sender, EventArgs e)
         {
+            if (filterstate != "add" && filterstate != "edit")
+            {
+                return;
+            }
+
             if (rbnOptions.Checked)
             {
                 WFReport.DataReport.OptionsRestriction rest = new DataReport.OptionsRestriction();
@@ -637,7 +696,11 @@ namespace WFReport
                 foreach (var i in lbxOptions.CheckedItems)
                     rest.options.Add(i.ToString());
 
-                currentReport.restrictions.Add(rest);
+                if (filterstate == "add")
+                    currentReport.restrictions.Add(rest);
+
+                if (filterstate == "edit")
+                    currentReport.restrictions[lbxAdditionalFilters.SelectedIndex] = rest;
 
                 UpdateUIwithReportData();
 
@@ -654,25 +717,101 @@ namespace WFReport
                 rest.fromValue = tbxFrom.Text;
                 rest.  toValue = tbxTo  .Text;
 
-                currentReport.restrictions.Add(rest);
+                if (filterstate == "add")
+                    currentReport.restrictions.Add(rest);
+
+                if (filterstate == "edit")
+                    currentReport.restrictions[lbxAdditionalFilters.SelectedIndex] = rest;
 
                 UpdateUIwithReportData();
 
                 btnFilterCancel_Click(sender, e);
             }
 
+            filterstate = "";
         }
 
         private void btnMainFiltersEdit_Click(object sender, EventArgs e)
         {
-            if (lbxAdditionalFilters.SelectedIndex >= 0)
+            if (!UpdateDeleteCheck())
             {
-                
+                return;
             }
+
+            filterstate = "edit";
+
+            pnlLeft.Enabled = false;
+
+            pnlFilterTableColumnType.Left = btnMainFiltersAdd.Left + 50;
+            pnlFilterTableColumnType.Top = btnMainFiltersAdd.Top + 300;
+
+            pnlFilterTableColumnType.Visible = true;
+
+            pnlFromTo.Top = pnlOptions.Top = pnlFilterTableColumnType.Top;
+
+            cboFilter.Items.Clear();
+
+            foreach (var i in cboColumns.Items)
+                cboFilter.Items.Add(i);
+
+            WFReport.Metadata.Column col = currentReport.restrictions[lbxAdditionalFilters.SelectedIndex].GetColumn();
+            WFReport.Metadata.Table  tab = currentReport.restrictions[lbxAdditionalFilters.SelectedIndex].GetTable();
+
+            for (int i = 0; i < cboFilter.Items.Count; i++)
+                if (cboFilter.Items[i].ToString().Contains(tab.Name + ": " + col.Name))
+                {
+                    cboFilter.SelectedIndex = i;
+                    break;
+                }
+
+            //cboFilter.Select()
+
+            WFReport.DataReport.Restriction restriction = currentReport.restrictions[lbxAdditionalFilters.SelectedIndex];
+
+            if (restriction is WFReport.DataReport.OptionsRestriction) rbnOptions.Select();
+            if (restriction is WFReport.DataReport. FromToRestriction) rbnFromTo .Select();
+
+            if (restriction is WFReport.DataReport.OptionsRestriction)
+            {
+                WFReport.DataReport.OptionsRestriction rest = restriction as WFReport.DataReport.OptionsRestriction;
+
+                pnlOptions.Visible = true;
+                pnlFromTo.Visible = false;
+                pnlOptions.Left = pnlFilterTableColumnType.Left + pnlFilterTableColumnType.Width;
+
+                lbxOptions.Items.Clear();
+
+                string table = cboFilter.Items[cboFilter.SelectedIndex].ToString().Split(new char[] { ':' })[0];
+                string column = cboFilter.Items[cboFilter.SelectedIndex].ToString().Split(new char[] { ':' })[1].Split(new char[] { ' ' })[1];
+
+                foreach (var i in GetAllEntriesForTableColumn(table, column))
+                {
+                    lbxOptions.Items.Add(i, rest.options.Contains(i));
+                }
+            }
+
+            if (restriction is WFReport.DataReport.FromToRestriction)
+            {
+                pnlFromTo.Visible = true;
+                pnlOptions.Visible = false;
+                pnlFromTo.Left = pnlFilterTableColumnType.Left + pnlFilterTableColumnType.Width;
+
+                WFReport.DataReport.FromToRestriction rest = restriction as WFReport.DataReport.FromToRestriction;
+
+                tbxFrom.Text = rest.fromValue;
+                tbxTo.Text = rest.toValue;
+            }
+
         }
 
         private void mimFileNew_Click(object sender, EventArgs e)
         {
+            if (currentDB == null)
+            {
+                MessageBox.Show("Database is not loaded. Please use \"Open metadata\" command (Ctrl+M)", "No database", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             currentReport = new DataReport.Report();
             currentPathReport = null;
 
@@ -702,8 +841,28 @@ namespace WFReport
             }
         }
 
+        private bool CheckSaveReport()
+        {
+            if (currentDB == null)
+            {
+                MessageBox.Show("Database is not loaded.\nPlease load it by using the command \"Load metadata\" (Ctrl + M)", "No database loaded", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (currentReport == null)
+            {
+                MessageBox.Show("Report is not loaded.\nPlease load it by using the command \"Load report\" (Ctrl + O), or create the new one (Ctrl + M)", "No report loaded", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        }
+
         private void mimFileSaveAs_Click(object sender, EventArgs e)
         {
+            if (!CheckSaveReport())
+                return;
+
             if (sfdReport.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 SaveReportToFile(currentReport, sfdReport.FileName);
@@ -712,19 +871,70 @@ namespace WFReport
 
         private void mimFileSave_Click(object sender, EventArgs e)
         {
+            if (!CheckSaveReport())
+                return;
+
             if (currentPathReport != null)
             {
                 SaveReportToFile(currentReport, currentPathReport);
             }
             else
             {
-                mimFileSave_Click(sender, e);
+                mimFileSaveAs_Click(sender, e);
             }
         }
 
         private void tbxSave_Click(object sender, EventArgs e)
         {
             mimFileSave_Click(sender, e);
+        }
+
+        private void mimFileExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void mimOptionsAbout_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("OLOLAP v1.0.", "OLOLAP info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private bool UpdateDeleteCheck()
+        {
+            if (lbxAdditionalFilters.SelectedIndex >= 0)
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Nothing is selected", "Selection error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        private void btnMainFiltersDelete_Click(object sender, EventArgs e)
+        {
+            if (!UpdateDeleteCheck())
+            {
+                return;
+            }
+
+            currentReport.restrictions.RemoveAt(lbxAdditionalFilters.SelectedIndex);
+
+            UpdateUIwithReportData();
+        }
+
+        private void lbxAdditionalFilters_DoubleClick(object sender, EventArgs e)
+        {
+            if (lbxAdditionalFilters.SelectedIndex < 0)
+                return;
+
+            btnMainFiltersEdit_Click(sender, e);
+        }
+
+        private void cboColumns_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //string table = 
         }
 
     }

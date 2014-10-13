@@ -9,5 +9,7 @@ namespace WFReport.DataReport
     public interface Restriction
     {
         string ToXML();
+        WFReport.Metadata.Table GetTable();
+        WFReport.Metadata.Column GetColumn();
     }
 }
